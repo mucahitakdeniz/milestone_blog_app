@@ -32,17 +32,15 @@ const Login = () => {
 
   const togglePasswordVisibility = () => {
     setShow(!show);
-  
   };
   return (
     <Container maxWidth="lg">
       <Grid
         container
         justifyContent="center"
-        alignItems="center"
         direction="row-reverse"
         sx={{
-          height: "100vh",
+          maxWidth: "80vh",
           p: 2,
         }}
       >
@@ -58,9 +56,10 @@ const Login = () => {
           >
             <LockPersonRoundedIcon sx={{ width: "3rem", height: "3rem" }} />
           </Avatar>
-          <Typography variant="h3" color="darkgreen" marginY={5}>
+          <Typography variant="h4" color="darkgreen"  marginX={15} marginY={5}>
             Üye Girişi
           </Typography>
+
           <Formik
             initialValues={{ email: "", password: "" }}
             validationSchema={loginSchema}
@@ -76,7 +75,9 @@ const Login = () => {
                   sx={{
                     display: "flex",
                     flexDirection: "column",
-                    gap: 3,
+                    gap: 4,
+                    width: "25rem",
+                    height: "1.5rem",
                   }}
                 >
                   <TextField
@@ -104,7 +105,7 @@ const Login = () => {
                     helperText={errors.password}
                     InputProps={{
                       endAdornment: (
-                        <InputAdornment sx={{}} position="end">
+                        <InputAdornment position="end">
                           <IconButton onClick={togglePasswordVisibility}>
                             {show ? (
                               <Visibility sx={{ color: "red" }} />
@@ -119,16 +120,11 @@ const Login = () => {
                   <Button variant="contained" type="submit">
                     Giriş
                   </Button>
+                  <Link to="/register">Hesabınız yok mu? Kaydolun</Link>
                 </Box>
               </Form>
             )}
           </Formik>
-
-          <Button
-            sx={{ color: "black", marginTop: "1rem" }}
-          >
-           <Link to="/register">Hesabınız yok mu? Kaydolun</Link>
-          </Button>
         </Grid>
       </Grid>
     </Container>

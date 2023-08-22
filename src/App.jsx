@@ -1,15 +1,11 @@
-import { Routes, Route } from "react-router-dom";
-import Login from "../pages/Login";
-import Register from "../pages/Register";
-
-const AppRouter = () => {
+import { BrowserRouter } from "react-router-dom";
+import AppRouter from "./router/AppRouter";
+const App = () => {
   return (
-  <Routes>
-      <Route path="/" element={<Login/>}/>
-      <Route path="/register" element={<Register/>}/>
-      </Routes>
-    
+    <BrowserRouter>
+      <AppRouter />
+    </BrowserRouter>
   );
 };
 
-export default AppRouter;
+export default App;

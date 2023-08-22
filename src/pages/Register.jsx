@@ -41,10 +41,9 @@ const Register = () => {
       <Grid
         container
         justifyContent="center"
-        alignItems="center"
         direction="row-reverse"
         sx={{
-          height: "100vh",
+          maxWidth: "80vh",
           p: 2,
         }}
       >
@@ -60,11 +59,18 @@ const Register = () => {
           >
             <HowToRegIcon sx={{ width: "3rem", height: "3rem" }} />
           </Avatar>
-          <Typography variant="h3" color="darkgreen" marginY={5}>
+          <Typography variant="h4" color="darkgreen" marginX={15} marginY={3}>
             Kayıt Ol
           </Typography>
+
           <Formik
-            initialValues={{ email: "", password: "" }}
+            initialValues={{
+              email: "",
+              password: "",
+              username: "",
+              image: "",
+              bio: "",
+            }}
             validationSchema={RegisterSchema}
             onSubmit={(values, actions) => {
               //Register işlemi
@@ -78,8 +84,9 @@ const Register = () => {
                   sx={{
                     display: "flex",
                     flexDirection: "column",
-                    gap: 3,
+                    gap: 2,
                     width: "25rem",
+                    height: "1.5rem",
                   }}
                 >
                   <TextField
@@ -159,14 +166,11 @@ const Register = () => {
                   <Button variant="contained" type="submit">
                     GÖNDER
                   </Button>
+                  <Link to={"/login"}> Hesabınız var mı? Giriş yapın</Link>
                 </Box>
               </Form>
             )}
           </Formik>
-
-          <Button type="p" sx={{ color: "black", marginTop: "1rem" }}>
-            <Link to={"/"}> Hesabınız var mı? Giriş yapın</Link>
-          </Button>
         </Grid>
       </Grid>
     </Container>
