@@ -10,12 +10,25 @@ import InputAdornment from "@mui/material/InputAdornment";
 import IconButton from "@mui/material/IconButton";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import { object, string } from "yup";
 
 import { TextField } from "@mui/material";
 
 const Login = () => {
   const [show, setShow] = useState(false);
-  const loginSchema = () => {};
+  const loginSchema = object({
+    email: string().required("Bu alan boş kırakılamaz"),
+    password: string()
+      .email("Lütfen geçerli bir e-posta adresi giriniz!")
+      .required("Bu alan boş kırakılamaz")
+      .min(8, "Şifreniz 8 karakretden küçük olamaz")
+      .max(20, "Şifreniz 20 karakretden büyük olamaz")
+      .matches(/\d+/, "En az bir rakam içermelidir.")
+      .matches(/[a-z]/, "En az bir küçük harf içermelidir.")
+      .matches(/[A-Z]/, "En az bir büyük harf içermelidir.")
+      .matches(/[!,?{}><%&$#*£+-.]+/, "En az bir özel karekter içermelidir."),
+  });
+
   const togglePasswordVisibility = () => {
     setShow(!show);
   };
@@ -55,7 +68,7 @@ const Login = () => {
               actions.setSubmitting(false);
             }}
           >
-            {({ isSubmitting }) => (
+            {({ handleChange, handleBlur, values, touched, errors }) => (
               <Form>
                 <Box
                   sx={{
@@ -69,6 +82,11 @@ const Login = () => {
                     name="email"
                     label="Email"
                     variant="outlined"
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    value={values.email}
+                    error={touched.email && Boolean(errors.email)}
+                    helperText={errors.email}
                   />
 
                   <TextField
@@ -77,6 +95,11 @@ const Login = () => {
                     name="password"
                     label="Password"
                     variant="outlined"
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    value={values.password}
+                    error={touched.password && Boolean(errors.password)}
+                    helperText={errors.password}
                     InputProps={{
                       endAdornment: (
                         <InputAdornment sx={{}} position="end">
@@ -98,10 +121,10 @@ const Login = () => {
               </Form>
             )}
           </Formik>
-           
-           
-            <Button type="p" sx={{color:"black",marginTop:"1rem"}}>  Don't have an account? Sing Up</Button>
-          
+
+          <Button type="p" sx={{ color: "black", marginTop: "1rem" }}>
+            Hesabınız yok mu? Kaydolun
+          </Button>
         </Grid>
       </Grid>
     </Container>
