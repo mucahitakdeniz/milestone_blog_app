@@ -20,6 +20,9 @@ dependencies:
   '@mui/styled-engine-sc':
     specifier: ^5.12.0
     version: 5.12.0(styled-components@6.0.7)
+  '@mui/system':
+    specifier: ^5.14.5
+    version: 5.14.5(@emotion/react@11.11.1)(@emotion/styled@11.11.0)(@types/react@18.2.15)(react@18.2.0)
   formik:
     specifier: ^2.4.3
     version: 2.4.3(react@18.2.0)

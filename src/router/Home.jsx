@@ -1,9 +1,14 @@
-import React from 'react'
+import React from "react";
+import Navbar from "../component/Navbar";
+import { Box } from "@mui/material";
 
 const Home = () => {
   return (
-    <div>Home</div>
-  )
-}
+    <Box sx={{ width: "100%" }}>
+      <Navbar />
+      <div>Home</div>
+    </Box>
+  );
+};
 
-export default Home
+export default Home;

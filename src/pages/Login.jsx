@@ -34,8 +34,8 @@ const Login = () => {
     setShow(!show);
   };
   return (
-    <Container maxWidth="lg">
-      <Grid
+    <Container maxWidth="lg" >
+      <Grid xs={12}
         container
         justifyContent="center"
         direction="row-reverse"
@@ -56,7 +56,7 @@ const Login = () => {
           >
             <LockPersonRoundedIcon sx={{ width: "3rem", height: "3rem" }} />
           </Avatar>
-          <Typography variant="h4" color="darkgreen"  marginX={15} marginY={5}>
+          <Typography variant="h4"  color="darkgreen"  marginX={15} marginY={5}>
             Üye Girişi
           </Typography>
 
