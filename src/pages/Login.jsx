@@ -10,7 +10,7 @@ import InputAdornment from "@mui/material/InputAdornment";
 import IconButton from "@mui/material/IconButton";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
-// import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
+
 import { TextField } from "@mui/material";
 
 const Login = () => {
@@ -82,9 +82,9 @@ const Login = () => {
                         <InputAdornment sx={{}} position="end">
                           <IconButton onClick={togglePasswordVisibility}>
                             {show ? (
-                              <Visibility sx={{ fontSize: "20px" }} />
+                              <Visibility sx={{ color: "red" }} />
                             ) : (
-                              <VisibilityOff />
+                              <VisibilityOff x={{ color: "green" }} />
                             )}
                           </IconButton>
                         </InputAdornment>
@@ -98,6 +98,10 @@ const Login = () => {
               </Form>
             )}
           </Formik>
+           
+           
+            <Button type="p" sx={{color:"black",marginTop:"1rem"}}>  Don't have an account? Sing Up</Button>
+          
         </Grid>
       </Grid>
     </Container>
