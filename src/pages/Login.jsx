@@ -11,8 +11,8 @@ import IconButton from "@mui/material/IconButton";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import { object, string } from "yup";
-
 import { TextField } from "@mui/material";
+import { Link } from "react-router-dom";
 
 const Login = () => {
   const [show, setShow] = useState(false);
@@ -32,6 +32,7 @@ const Login = () => {
 
   const togglePasswordVisibility = () => {
     setShow(!show);
+  
   };
   return (
     <Container maxWidth="lg">
@@ -123,8 +124,10 @@ const Login = () => {
             )}
           </Formik>
 
-          <Button type="p" sx={{ color: "black", marginTop: "1rem" }}>
-            Hesabınız yok mu? Kaydolun
+          <Button
+            sx={{ color: "black", marginTop: "1rem" }}
+          >
+           <Link to="/register">Hesabınız yok mu? Kaydolun</Link>
           </Button>
         </Grid>
       </Grid>

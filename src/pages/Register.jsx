@@ -11,8 +11,8 @@ import IconButton from "@mui/material/IconButton";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import { object, string } from "yup";
-
 import { TextField } from "@mui/material";
+import { Link } from "react-router-dom";
 
 const Register = () => {
   const [show, setShow] = useState(false);
@@ -165,7 +165,7 @@ const Register = () => {
           </Formik>
 
           <Button type="p" sx={{ color: "black", marginTop: "1rem" }}>
-            Hesabınız var mı? Giriş yapın
+            <Link to={"/"}> Hesabınız var mı? Giriş yapın</Link>
           </Button>
         </Grid>
       </Grid>
