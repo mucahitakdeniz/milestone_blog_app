@@ -2,7 +2,7 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import Avatar from "@mui/material/Avatar";
-import LockPersonRoundedIcon from "@mui/icons-material/LockPersonRounded";
+import HowToRegIcon from "@mui/icons-material/HowToReg";
 import { Formik, Form } from "formik";
 import { Box, Button } from "@mui/material";
 import { useState } from "react";
@@ -14,12 +14,15 @@ import { object, string } from "yup";
 
 import { TextField } from "@mui/material";
 
-const Login = () => {
+const Register = () => {
   const [show, setShow] = useState(false);
-  const loginSchema = object({
+  const RegisterSchema = object({
     email: string()
       .email("Lütfen geçerli bir e-posta adresi giriniz!")
       .required("Bu alan boş kırakılamaz"),
+    username: string().required("Bu alan boş kırakılamaz"),
+    image: string().url("Bir resim veya icon baglantı adresi giriniz"),
+
     password: string()
       .required("Bu alan boş kırakılamaz")
       .min(8, "Şifreniz 8 karakretden küçük olamaz")
@@ -55,16 +58,16 @@ const Login = () => {
               height: "5rem",
             }}
           >
-            <LockPersonRoundedIcon sx={{ width: "3rem", height: "3rem" }} />
+            <HowToRegIcon sx={{ width: "3rem", height: "3rem" }} />
           </Avatar>
           <Typography variant="h3" color="darkgreen" marginY={5}>
-            Üye Girişi
+            Kayıt Ol
           </Typography>
           <Formik
             initialValues={{ email: "", password: "" }}
-            validationSchema={loginSchema}
+            validationSchema={RegisterSchema}
             onSubmit={(values, actions) => {
-              //login işlemi
+              //Register işlemi
               actions.resetForm();
               actions.setSubmitting(false);
             }}
@@ -76,18 +79,56 @@ const Login = () => {
                     display: "flex",
                     flexDirection: "column",
                     gap: 3,
+                    width: "25rem",
                   }}
                 >
                   <TextField
+                    type="text"
+                    name="username"
+                    label="User Name"
+                    variant="outlined"
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    value={values.username}
+                    error={touched.username && Boolean(errors.username)}
+                    helperText={errors.username}
+                    sx={{ width: "100%" }}
+                  />
+                  <TextField
                     type="email"
                     name="email"
-                    label="Email"
+                    label="Email Address"
                     variant="outlined"
                     onChange={handleChange}
                     onBlur={handleBlur}
                     value={values.email}
                     error={touched.email && Boolean(errors.email)}
                     helperText={errors.email}
+                  />
+                  <TextField
+                    type="url"
+                    name="image"
+                    label="Resim"
+                    variant="outlined"
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    value={values.image}
+                    error={touched.image && Boolean(errors.image)}
+                    helperText={errors.image}
+                  />
+                  <TextField
+                    type="text"
+                    name="bio"
+                    label="Bio"
+                    variant="outlined"
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    value={values.bio}
+                    helperText={
+                      touched.bio
+                        ? "Bu alan zorunlu degildir"
+                        : "Kendinizden kısaca tanıtınız"
+                    }
                   />
 
                   <TextField
@@ -116,7 +157,7 @@ const Login = () => {
                     }}
                   />
                   <Button variant="contained" type="submit">
-                    Giriş
+                    GÖNDER
                   </Button>
                 </Box>
               </Form>
@@ -124,7 +165,7 @@ const Login = () => {
           </Formik>
 
           <Button type="p" sx={{ color: "black", marginTop: "1rem" }}>
-            Hesabınız yok mu? Kaydolun
+            Hesabınız var mı? Giriş yapın
           </Button>
         </Grid>
       </Grid>
@@ -132,4 +173,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Register;
