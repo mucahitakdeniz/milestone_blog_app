@@ -7,10 +7,13 @@ import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
 import { useState } from "react";
 import { Link } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
+  const navigate = useNavigate();
   const [auth, setAuth] = useState(true);
   const [anchorEl, setAnchorEl] = useState(null);
+  const user = false;
 
   // const handleChange = (event) => {
   //   setAuth(event.target.checked);
@@ -22,6 +25,7 @@ const Navbar = () => {
 
   const handleClose = () => {
     setAnchorEl(null);
+    setAuth(true);
   };
 
   return (
@@ -30,8 +34,8 @@ const Navbar = () => {
         position="static"
         sx={{ with: "100%", height: "5rem", backgroundColor: "lightseagreen" }}
       >
-        <Toolbar sx={{display:"flex",   justifyContent:"space-between"}}>
-          <Box>
+        <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
+          <Box sx={{ display: "flex", alignItems: "center" }}>
             <img
               src="https://lms.clarusway.com/pluginfile.php/1/core_admin/logocompact/300x300/1688763931/clarusway_LOGO_tek_png.png"
               width="50rem"
@@ -52,7 +56,7 @@ const Navbar = () => {
               variant="button"
               underline="none"
               marginX={1}
-              href="/register"
+              href="/newblog"
             >
               New Blog
             </Link>
@@ -61,7 +65,7 @@ const Navbar = () => {
               variant="button"
               underline="none"
               marginX={1}
-              href="/login"
+              href="/about"
             >
               About
             </Link>
@@ -94,8 +98,13 @@ const Navbar = () => {
                   open={Boolean(anchorEl)}
                   onClose={handleClose}
                 >
-                  <MenuItem onClick={handleClose}>Profile</MenuItem>
-                  <MenuItem onClick={handleClose}>My account</MenuItem>
+                  {user ? (
+                    <MenuItem onClick={handleClose}>Log Out</MenuItem>
+                  ) : (
+                    <MenuItem onClick={() => navigate("/login")}>
+                      Login
+                    </MenuItem>
+                  )}
                 </Menu>
               </div>
             )}
