@@ -34,8 +34,9 @@ const Login = () => {
     setShow(!show);
   };
   return (
-    <Container  maxWidth="lg" sx={{display:"flex", justifyContent:"center"}} >
-      <Grid xs={12}
+    <Container maxWidth="lg" sx={{ display: "flex", justifyContent: "center" }}>
+      <Grid
+        xs={12}
         container
         justifyContent="center"
         direction="row-reverse"
@@ -56,9 +57,7 @@ const Login = () => {
           >
             <LockPersonRoundedIcon sx={{ width: "3rem", height: "3rem" }} />
           </Avatar>
-          <Typography variant="h4"  color="darkgreen"  marginX={15} marginY={5}>
-            Üye Girişi
-          </Typography>
+          
 
           <Formik
             initialValues={{ email: "", password: "" }}
@@ -75,11 +74,15 @@ const Login = () => {
                   sx={{
                     display: "flex",
                     flexDirection: "column",
-                    gap: 4,
+                    margin: "auto",
+                    gap: 2,
                     width: "25rem",
                     height: "1.5rem",
                   }}
                 >
+                  <Typography variant="h4" color="darkgreen" marginX={15} marginY={5}>
+            Üye Girişi
+          </Typography>
                   <TextField
                     type="email"
                     name="email"

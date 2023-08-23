@@ -10,7 +10,7 @@ const Footer = () => {
         height: "5rem",
         backgroundColor: "lightseagreen",
         marginTop: "auto",
-        marginBottom:"2rem"
+        marginBottom: "2rem",
       }}
     >
       <Typography
@@ -31,9 +31,18 @@ const Footer = () => {
           MarginY: "1rem",
         }}
       >
-        Copyright ©  <Link variant="a" href="https://clarusway.com/" sx={{color:"black", marginX:"1rem"}}>  Clarusway  </Link> 2023
+        Copyright ©{" "}
+        <Link
+          variant="a"
+          href="https://clarusway.com/"
+          target="_blank"
+          sx={{ color: "black", marginX: "1rem" }}
+        >
+         
+          Clarusway
+        </Link>
+        2023
       </Typography>
-      
     </AppBar>
   );
 };

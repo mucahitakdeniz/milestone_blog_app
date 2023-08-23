@@ -5,7 +5,7 @@ import Typography from "@mui/material/Typography";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import InstagramIcon from "@mui/icons-material/Instagram";
-import YouTubeIcon from "@mui/icons-material/YouTube";
+import GitHubIcon from "@mui/icons-material/GitHub";
 import { Link } from "@mui/material";
 import { SvgIcon } from "@mui/material";
 
@@ -26,8 +26,8 @@ const About = () => {
           justifyContent: "center",
           alignItems: "center",
           gap: "2rem",
-          height: "50vh",
-          width: "30vh",
+          height: "55vh",
+          width: "35vh",
           padding: "2rem",
           boxShadow: "0 10px 18px rgba(3, 2, 2, 0.788)",
         }}
@@ -41,37 +41,34 @@ const About = () => {
           Clarusway
         </Typography>
         <Typography variant="h4" color="dark" fontWeight="100">
-          Full Stack Team
+          Mücahit Akdeniz{" "}
+        </Typography>
+        <Typography variant="h6" color="dark" fontWeight="100">
+          Junior Frontend Developer{" "}
         </Typography>
 
         <CardActions>
           <Link
             variant="button"
             target="_blank"
-            href="https://www.linkedin.com/school/clarusway/"
+            href="https://www.linkedin.com/in/m%C3%BCcahit-akdeniz-9a477a269/"
           >
             <LinkedInIcon style={{ fontSize: "40px", color: "black" }} />
           </Link>
           <Link
             variant="button"
             target="_blank"
-            href="https://twitter.com/clarusway?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Eauthor"
+            href="https://twitter.com/Mcht_Akdnz"
           >
             <TwitterIcon style={{ fontSize: "40px", color: "black" }} />
           </Link>
+
           <Link
             variant="button"
             target="_blank"
-            href="https://www.instagram.com/clarusway/?hl=en"
+            href="https://github.com/mucahitakdeniz"
           >
-            <InstagramIcon style={{ fontSize: "40px", color: "black" }} />
-          </Link>
-          <Link
-            variant="button"
-            target="_blank"
-            href="https://www.youtube.com/c/clarusway"
-          >
-            <YouTubeIcon style={{ fontSize: "40px", color: "black" }} />
+            <GitHubIcon style={{ fontSize: "40px", color: "black" }} />
           </Link>
         </CardActions>
       </Card>

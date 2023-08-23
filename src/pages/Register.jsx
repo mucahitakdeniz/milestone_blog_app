@@ -37,7 +37,7 @@ const Register = () => {
     setShow(!show);
   };
   return (
-    <Container maxWidth="lg">
+    <Container maxWidth="lg" sx={{ display: "flex", justifyContent: "center" }}>
       <Grid
         container
         justifyContent="center"
@@ -59,9 +59,7 @@ const Register = () => {
           >
             <HowToRegIcon sx={{ width: "3rem", height: "3rem" }} />
           </Avatar>
-          <Typography variant="h4" color="darkgreen" marginX={15} marginY={3}>
-            Kayıt Ol
-          </Typography>
+          
 
           <Formik
             initialValues={{
@@ -84,11 +82,15 @@ const Register = () => {
                   sx={{
                     display: "flex",
                     flexDirection: "column",
+                    margin:"auto",
                     gap: 2,
                     width: "25rem",
                     height: "1.5rem",
                   }}
                 >
+                  <Typography variant="h4" color="darkgreen" marginX={15} marginY={3}>
+            Kayıt Ol
+          </Typography>
                   <TextField
                     type="text"
                     name="username"
