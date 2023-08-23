@@ -10,6 +10,7 @@ const Footer = () => {
         height: "5rem",
         backgroundColor: "lightseagreen",
         marginTop: "auto",
+        marginBottom:"2rem"
       }}
     >
       <Typography

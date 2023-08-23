@@ -7,7 +7,7 @@ const Home = () => {
   return (
     <Box sx={{ width: "100%" }}>
       <Navbar />
-      <Container sx={{height:"80vh"}}>
+      <Container sx={{height:"75vh"}}>
         <Outlet />
       </Container>
 
