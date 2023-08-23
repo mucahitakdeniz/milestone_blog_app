@@ -1,9 +1,7 @@
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
-import MenuIcon from "@mui/icons-material/Menu";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 // import Switch from "@mui/material/Switch";
 // import FormControlLabel from "@mui/material/FormControlLabel";
@@ -11,14 +9,15 @@ import FormGroup from "@mui/material/FormGroup";
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
 import { useState } from "react";
+import { Link } from "@mui/material";
 
 const Navbar = () => {
   const [auth, setAuth] = useState(true);
   const [anchorEl, setAnchorEl] = useState(null);
 
-  const handleChange = (event) => {
-    setAuth(event.target.checked);
-  };
+  // const handleChange = (event) => {
+  //   setAuth(event.target.checked);
+  // };
 
   const handleMenu = (event) => {
     setAnchorEl(event.currentTarget);
@@ -36,23 +35,36 @@ const Navbar = () => {
         sx={{ with: "100%", height: "5rem", backgroundColor: "lightseagreen" }}
       >
         <Toolbar sx={{ alignItems: "center" }}>
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="menu"
-            sx={{ mr: 2, display: { md: "none" } }}
+          <Link
+            color="#01020c"
+            variant="button"
+            underline="none"
+            marginX={1}
+            href="/"
           >
-            <MenuIcon />
-          </IconButton>
-          
-            <Typography variant="h5" component="div" sx={{ flexGrow: 1 }}>
-              Photos
-            </Typography>
-       
+            Dashboard
+          </Link>
+          <Link
+            color="#01020c"
+            variant="button"
+            underline="none"
+            marginX={1}
+            href="/register"
+          >
+            New Blog
+          </Link>
+          <Link
+            color="#01020c"
+            variant="button"
+            underline="none"
+            marginX={1}
+            href="/login"
+          >
+            About
+          </Link>
 
           {auth && (
-            <div>
+            <div sx={{marginLeft:"auto"}}>
               <IconButton
                 size="large"
                 aria-label="account of current user"

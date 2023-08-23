@@ -34,7 +34,7 @@ const Login = () => {
     setShow(!show);
   };
   return (
-    <Container maxWidth="lg" >
+    <Container  maxWidth="lg" sx={{display:"flex", justifyContent:"center"}} >
       <Grid xs={12}
         container
         justifyContent="center"
