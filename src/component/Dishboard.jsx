@@ -14,6 +14,7 @@ const Dishboard = () => {
       setCardsData(data);
     } catch (error) {
       console.log(error);
+      alert("axios hatalı");
     }
   };
   useEffect(() => {
