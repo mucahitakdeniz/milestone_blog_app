@@ -59,7 +59,6 @@ const Register = () => {
           >
             <HowToRegIcon sx={{ width: "3rem", height: "3rem" }} />
           </Avatar>
-          
 
           <Formik
             initialValues={{
@@ -82,15 +81,20 @@ const Register = () => {
                   sx={{
                     display: "flex",
                     flexDirection: "column",
-                    margin:"auto",
+                    margin: "auto",
                     gap: 2,
                     width: "25rem",
                     height: "1.5rem",
                   }}
                 >
-                  <Typography variant="h4" color="darkgreen" marginX={15} marginY={3}>
-            Kayıt Ol
-          </Typography>
+                  <Typography
+                    variant="h4"
+                    color="darkgreen"
+                    marginX={15}
+                    marginY={3}
+                  >
+                    Kayıt Ol
+                  </Typography>
                   <TextField
                     type="text"
                     name="username"
@@ -136,7 +140,7 @@ const Register = () => {
                     helperText={
                       touched.bio
                         ? "Bu alan zorunlu degildir"
-                        : "Kendinizden kısaca tanıtınız"
+                        : "Kendinizi kısaca tanıtınız"
                     }
                   />
 
