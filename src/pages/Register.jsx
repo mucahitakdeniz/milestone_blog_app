@@ -13,8 +13,10 @@ import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import { object, string } from "yup";
 import { TextField } from "@mui/material";
 import { Link } from "react-router-dom";
+import useAuthCall from "../hooks/useAuthCall";
 
 const Register = () => {
+  const { register } = useAuthCall();
   const [show, setShow] = useState(false);
   const RegisterSchema = object({
     email: string()
@@ -70,7 +72,7 @@ const Register = () => {
             }}
             validationSchema={RegisterSchema}
             onSubmit={(values, actions) => {
-              //Register işlemi
+              register(values);
               actions.resetForm();
               actions.setSubmitting(false);
             }}

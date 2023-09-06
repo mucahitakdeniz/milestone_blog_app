@@ -20,7 +20,8 @@ const authSlice = createSlice({
     },
     logoutSuccess: (state) => {
       state.loading = false;
-      state, (currentUser = null);
+      state;
+      currentUser = null;
       state.token = null;
     },
     registerSuccess: ({ loading, currentUser, token }, { payload }) => {

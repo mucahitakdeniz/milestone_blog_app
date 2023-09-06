@@ -13,8 +13,13 @@ import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import { object, string } from "yup";
 import { TextField } from "@mui/material";
 import { Link } from "react-router-dom";
+import useAuthCall from "../hooks/useAuthCall";
 
 const Login = () => {
+  const URL = import.meta.env.VITE_BAS_URL;
+  console.log(URL);
+
+  const { login } = useAuthCall();
   const [show, setShow] = useState(false);
   const loginSchema = object({
     email: string()
@@ -57,13 +62,12 @@ const Login = () => {
           >
             <LockPersonRoundedIcon sx={{ width: "3rem", height: "3rem" }} />
           </Avatar>
-          
 
           <Formik
             initialValues={{ email: "", password: "" }}
             validationSchema={loginSchema}
             onSubmit={(values, actions) => {
-              //login işlemi
+              login(values);
               actions.resetForm();
               actions.setSubmitting(false);
             }}
@@ -80,9 +84,14 @@ const Login = () => {
                     height: "1.5rem",
                   }}
                 >
-                  <Typography variant="h4" color="darkgreen" marginX={15} marginY={5}>
-            Üye Girişi
-          </Typography>
+                  <Typography
+                    variant="h4"
+                    color="darkgreen"
+                    marginX={15}
+                    marginY={5}
+                  >
+                    Üye Girişi
+                  </Typography>
                   <TextField
                     type="email"
                     name="email"
