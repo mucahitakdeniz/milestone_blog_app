@@ -18,14 +18,31 @@ import useAuthCall from "../hooks/useAuthCall";
 const Register = () => {
   const { register } = useAuthCall();
   const [show, setShow] = useState(false);
+  const [show2, setShow2] = useState(false);
   const RegisterSchema = object({
     email: string()
       .email("Lütfen geçerli bir e-posta adresi giriniz!")
       .required("Bu alan boş kırakılamaz"),
-    username: string().required("Bu alan boş kırakılamaz"),
+    username: string()
+      .required("Bu alan boş kırakılamaz")
+      .max(150, "User name 150 karakretden büyük olamaz"),
+    first_name: string()
+      .max(150, "First name 150 karakretden büyük olamaz")
+      .matches(/^[a-zA-Z0-9\s]*$/, "Bu alana özel karakter içeremez"),
+    last_name: string()
+      .max(150, "Last name 150 karakretden büyük olamaz")
+      .matches(/^[a-zA-Z0-9\s]*$/, "Bu alana özel karakter içeremez"),
     image: string().url("Bir resim veya icon baglantı adresi giriniz"),
 
     password: string()
+      .required("Bu alan boş kırakılamaz")
+      .min(8, "Şifreniz 8 karakretden küçük olamaz")
+      .max(20, "Şifreniz 20 karakretden büyük olamaz")
+      .matches(/\d+/, "En az bir rakam içermelidir.")
+      .matches(/[a-z]/, "En az bir küçük harf içermelidir.")
+      .matches(/[A-Z]/, "En az bir büyük harf içermelidir.")
+      .matches(/[!,?{}><%&$#*£+-.]+/, "En az bir özel karekter içermelidir."),
+    password2: string()
       .required("Bu alan boş kırakılamaz")
       .min(8, "Şifreniz 8 karakretden küçük olamaz")
       .max(20, "Şifreniz 20 karakretden büyük olamaz")
@@ -37,6 +54,9 @@ const Register = () => {
 
   const togglePasswordVisibility = () => {
     setShow(!show);
+  };
+  const togglePasswordVisibility2 = () => {
+    setShow2(!show2);
   };
   return (
     <Container maxWidth="lg" sx={{ display: "flex", justifyContent: "center" }}>
@@ -64,11 +84,14 @@ const Register = () => {
 
           <Formik
             initialValues={{
-              email: "",
-              password: "",
               username: "",
+              first_name: "",
+              last_name: "",
+              email: "",
               image: "",
               bio: "",
+              password: "",
+              password2: "",
             }}
             validationSchema={RegisterSchema}
             onSubmit={(values, actions) => {
@@ -110,6 +133,38 @@ const Register = () => {
                     sx={{ width: "100%" }}
                   />
                   <TextField
+                    type="text"
+                    name="first_name"
+                    label="First Name"
+                    variant="outlined"
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    value={values.first_name}
+                    error={touched.first_name && Boolean(errors.first_name)}
+                    helperText={
+                      errors.first_name
+                        ? errors.first_name
+                        : "Bu alan zorunlu degildir"
+                    }
+                    sx={{ width: "100%" }}
+                  />
+                  <TextField
+                    type="text"
+                    name="last_name"
+                    label="Last Name"
+                    variant="outlined"
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    value={values.last_name}
+                    error={touched.last_name && Boolean(errors.last_name)}
+                    helperText={
+                      errors.last_name
+                        ? errors.last_name
+                        : "Bu alan zorunlu degildir"
+                    }
+                    sx={{ width: "100%" }}
+                  />
+                  <TextField
                     type="email"
                     name="email"
                     label="Email Address"
@@ -129,7 +184,9 @@ const Register = () => {
                     onBlur={handleBlur}
                     value={values.image}
                     error={touched.image && Boolean(errors.image)}
-                    helperText={errors.image}
+                    helperText={
+                      errors.image ? errors.image : "Bu alan zorunlu degildir"
+                    }
                   />
                   <TextField
                     type="text"
@@ -162,6 +219,31 @@ const Register = () => {
                         <InputAdornment sx={{}} position="end">
                           <IconButton onClick={togglePasswordVisibility}>
                             {show ? (
+                              <Visibility sx={{ color: "red" }} />
+                            ) : (
+                              <VisibilityOff x={{ color: "green" }} />
+                            )}
+                          </IconButton>
+                        </InputAdornment>
+                      ),
+                    }}
+                  />
+                  <TextField
+                    xs={12}
+                    type={show ? "text" : "password"}
+                    name="password2"
+                    label="Password 2"
+                    variant="outlined"
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    value={values.password2}
+                    error={touched.password2 && Boolean(errors.password2)}
+                    helperText={errors.password2}
+                    InputProps={{
+                      endAdornment: (
+                        <InputAdornment sx={{}} position="end">
+                          <IconButton onClick={togglePasswordVisibility2}>
+                            {show2 ? (
                               <Visibility sx={{ color: "red" }} />
                             ) : (
                               <VisibilityOff x={{ color: "green" }} />

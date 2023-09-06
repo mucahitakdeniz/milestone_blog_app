@@ -17,8 +17,11 @@ const useAuthCall = () => {
   const login = async (user) => {
     dispatch(fetchStart());
     try {
-      console.log("başladı");
-      const { data } = await axios.post(`${import.meta.env.VITE_BASE_URL}/users/auth/login/`, user);
+      console.log(import.meta.env.VITE_BASE_URL);
+      const { data } = await axios.post(
+        `${import.meta.env.VITE_BASE_URL}/users/auth/login/`,
+        user
+      );
       console.log("succses");
       dispatch(loginSuccess(data));
       notify("Login successful", "succsess");
@@ -44,7 +47,10 @@ const useAuthCall = () => {
   const register = async (user) => {
     dispatch(fetchStart());
     try {
-      const { data } = await axios.post(`${import.meta.env.VITE_BASE_URL}/users/register/`, user);
+      const { data } = await axios.post(
+        `https://33438.fullstack.clarusway.com/users/register/`,
+        user
+      );
       dispatch(registerSuccess(data));
       notify("Register successful", "succsess");
     } catch (error) {
