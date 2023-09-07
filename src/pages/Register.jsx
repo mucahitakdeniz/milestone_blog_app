@@ -16,7 +16,7 @@ import { Link } from "react-router-dom";
 import useAuthCall from "../hooks/useAuthCall";
 
 const Register = () => {
-  const { register } = useAuthCall();
+  const { register, login } = useAuthCall();
   const [show, setShow] = useState(false);
   const [show2, setShow2] = useState(false);
   const RegisterSchema = object({
@@ -96,6 +96,8 @@ const Register = () => {
             validationSchema={RegisterSchema}
             onSubmit={(values, actions) => {
               register(values);
+              const user = { email: values.email, password: values.password };
+              login(user);
               actions.resetForm();
               actions.setSubmitting(false);
             }}

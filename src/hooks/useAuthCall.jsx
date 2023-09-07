@@ -48,7 +48,6 @@ const useAuthCall = () => {
       const { data } = await axios.post(`${URL}/users/register/`, user);
       dispatch(registerSuccess(data));
       notify("Register successful", "success");
-      navigate("/");
     } catch (error) {
       console.log(error);
       dispatch(fetchFail());

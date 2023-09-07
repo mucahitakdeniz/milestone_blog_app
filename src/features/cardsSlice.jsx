@@ -1,30 +1,56 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const cardsSlice = createSlice({
-  name: "auth",
-  initialState: 
-  {
-  "id": 0,
-  "title": "string",
-  "content": "string",
-  "image": "http://example.com",
-  "category": 0,
-  "publish_date": "2019-08-24T14:15:22Z",
-  "author": "string",
-  "status": "d",
-  "slug": "string",
-  "comments": [],
-  "category_name": "string",
-  "likes": "string",
-  "post_views": "string",
-  "comment_count": "string",
-  "likes_n": "string"
+  name: "card",
+  initialState: {
+    loading: false,
+    error: false,
+    id: null,
+    title: null,
+    content: null,
+    image: null,
+    category: null,
+    publish_date: null,
+    author: null,
+    status: null,
+    slug: null,
+    comments: null,
+    category_name: null,
+    likes: null,
+    post_views: null,
+    comment_count: null,
+    likes_n: null,
   },
-  
-  
+  reducers: {
+    fetchStart: (state) => {
+      state.loading = true;
+      state.error = false;
+    },
+
+    readCards: (state, { payload }) => {
+      state.loading = false;
+      state.id = payload?.id;
+      title = payload?.title;
+      content = payload?.content;
+      image = payload?.image;
+      category = payload?.categoty;
+      publish_date = payload?.publish_date;
+      author = payload?.author;
+      status = payload?.status;
+      slug = payload?.slug;
+      comments = payload?.comments;
+      category_name = payload?.category_name;
+      likes = payload?.likes;
+      post_views = payload?.post_views;
+      comment_count = payload?.comment_count;
+      likes_n = payload?.likes_n;
+    },
+    fetchFail: (state) => {
+      state.loading = false;
+      state.error = true;
+    },
+  },
 });
 
-export const {
-
-} = cardsSlice.actions;
+export const { fetchStart, readCards, fetchFail } = cardsSlice.actions;
 export default cardsSlice.reducer;

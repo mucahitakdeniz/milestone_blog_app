@@ -8,17 +8,18 @@ import { Box, Grid } from "@mui/material";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
-import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { useState } from "react";
+// import { useSelector } from "react-redux";
+import useCardsFn from "../hooks/useCardsFn"
+
+
+
 const Cards = ({ cardsData }) => {
   console.log(cardsData);
-const [rmId, setRmId] = useState("")
-  const user = useSelector((state) => state.auth);
-  const navigate = useNavigate();
-  const handleMore = (id) => {
-    user.currentUser ? setRmId(id) : navigate("/login");
-  };
+  // const user = useSelector((state) => state.auth);
+  // const cards = useSelector((state) => state.cards);
+  const {readMore} =useCardsFn()
+
+
 
   return (
     <Grid
@@ -95,7 +96,7 @@ const [rmId, setRmId] = useState("")
               </Box>
               <Button
                 sx={{ backgroundColor: "lightgreen", marginLeft: "2rem" }}
-                onClick={() => handleMore(item.id)}
+                onClick={() => readMore(item.id)}
               >
                 Read More
               </Button>
