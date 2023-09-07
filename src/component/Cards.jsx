@@ -10,12 +10,14 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { useState } from "react";
 const Cards = ({ cardsData }) => {
+  console.log(cardsData);
+const [rmId, setRmId] = useState("")
   const user = useSelector((state) => state.auth);
-  console.log(user);
   const navigate = useNavigate();
-  const handleMore = () => {
-    user.currentUser ? navigate("/readmore") : navigate("/login");
+  const handleMore = (id) => {
+    user.currentUser ? setRmId(id) : navigate("/login");
   };
 
   return (
@@ -24,7 +26,7 @@ const Cards = ({ cardsData }) => {
       spacing={5}
       sx={{ marginY: "2rem", justifyContent: "center" }}
     >
-      {cardsData.map((item) => (
+      {cardsData.filter((item) => rmId ? item.id===rmId : item ).map((item) => (
         <Grid item key={item.id} xs={12} sm={6} md={4}>
           <Card
             sx={{
