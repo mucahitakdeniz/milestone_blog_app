@@ -13,15 +13,13 @@ import { notify } from "../helper/sweetaAlert";
 const useAuthCall = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const URL = import.meta.env.VITE_BASE_URL;
 
   const login = async (user) => {
     dispatch(fetchStart());
     try {
       console.log(import.meta.env.VITE_BASE_URL);
-      const { data } = await axios.post(
-        `${import.meta.env.VITE_BASE_URL}/users/auth/login/`,
-        user
-      );
+      const { data } = await axios.post(`${URL}/users/auth/login/`, user);
       console.log("succses");
       dispatch(loginSuccess(data));
       notify("Login successful", "succsess");
@@ -35,9 +33,10 @@ const useAuthCall = () => {
   const logout = async () => {
     dispatch(fetchStart());
     try {
-      await axios.post(`${import.meta.env.VITE_BASE_URL}/users/auth/logout/`);
+      await axios.post(`${URL}/users/auth/logout/`);
       dispatch(logoutSuccess());
       notify("Logout successful", "succsess");
+      navigate("/login")
     } catch (error) {
       console.log(error);
       dispatch(fetchFail());
@@ -47,12 +46,10 @@ const useAuthCall = () => {
   const register = async (user) => {
     dispatch(fetchStart());
     try {
-      const { data } = await axios.post(
-        `https://33438.fullstack.clarusway.com/users/register/`,
-        user
-      );
+      const { data } = await axios.post(`${URL}/users/register/`, user);
       dispatch(registerSuccess(data));
       notify("Register successful", "succsess");
+      navigate("/")
     } catch (error) {
       console.log(error);
       dispatch(fetchFail());
