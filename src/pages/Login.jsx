@@ -16,8 +16,6 @@ import { Link } from "react-router-dom";
 import useAuthCall from "../hooks/useAuthCall";
 
 const Login = () => {
-  const URL = import.meta.env.VITE_BAS_URL;
-  console.log(URL);
 
   const { login } = useAuthCall();
   const [show, setShow] = useState(false);

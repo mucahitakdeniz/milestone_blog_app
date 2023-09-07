@@ -8,13 +8,16 @@ import Menu from "@mui/material/Menu";
 import { useState } from "react";
 import { Link } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import useAuthCall from "../hooks/useAuthCall";
 
 const Navbar = () => {
   const navigate = useNavigate();
   const [auth, setAuth] = useState(true);
   const [anchorEl, setAnchorEl] = useState(null);
-  const user = false;
+  const { logout } = useAuthCall();
 
+  const user = useSelector((state) => state.auth);
   // const handleChange = (event) => {
   //   setAuth(event.target.checked);
   // };
@@ -98,8 +101,8 @@ const Navbar = () => {
                   open={Boolean(anchorEl)}
                   onClose={handleClose}
                 >
-                  {user ? (
-                    <MenuItem onClick={handleClose}>Log Out</MenuItem>
+                  {user.currentUser ? (
+                    <MenuItem onClick={() => logout()}>Log Out</MenuItem>
                   ) : (
                     <MenuItem onClick={() => navigate("/login")}>
                       Login

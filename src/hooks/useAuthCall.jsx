@@ -36,7 +36,7 @@ const useAuthCall = () => {
       await axios.post(`${URL}/users/auth/logout/`);
       dispatch(logoutSuccess());
       notify("Logout successful", "succsess");
-      navigate("/login")
+      navigate("/login");
     } catch (error) {
       console.log(error);
       dispatch(fetchFail());
@@ -49,7 +49,7 @@ const useAuthCall = () => {
       const { data } = await axios.post(`${URL}/users/register/`, user);
       dispatch(registerSuccess(data));
       notify("Register successful", "succsess");
-      navigate("/")
+      navigate("/");
     } catch (error) {
       console.log(error);
       dispatch(fetchFail());

@@ -9,9 +9,10 @@ import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 const Cards = ({ cardsData }) => {
-  const currentUser = false;
-  console.log(cardsData);
+  const user = useSelector((state) => state.auth);
+  console.log(user);
   const navigate = useNavigate();
   const handleMore = () => {
     navigate("/readmore");
