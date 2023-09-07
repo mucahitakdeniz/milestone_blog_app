@@ -20,9 +20,8 @@ const useAuthCall = () => {
     try {
       console.log(import.meta.env.VITE_BASE_URL);
       const { data } = await axios.post(`${URL}/users/auth/login/`, user);
-      console.log("succses");
       dispatch(loginSuccess(data));
-      notify("Login successful", "succsess");
+      notify("Login successful", "success");
       navigate("/");
     } catch (error) {
       console.log(error);
@@ -35,7 +34,7 @@ const useAuthCall = () => {
     try {
       await axios.post(`${URL}/users/auth/logout/`);
       dispatch(logoutSuccess());
-      notify("Logout successful", "succsess");
+      notify("Logout successful", "success");
       navigate("/login");
     } catch (error) {
       console.log(error);
@@ -48,7 +47,7 @@ const useAuthCall = () => {
     try {
       const { data } = await axios.post(`${URL}/users/register/`, user);
       dispatch(registerSuccess(data));
-      notify("Register successful", "succsess");
+      notify("Register successful", "success");
       navigate("/");
     } catch (error) {
       console.log(error);

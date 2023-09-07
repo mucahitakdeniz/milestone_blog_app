@@ -15,7 +15,7 @@ const Cards = ({ cardsData }) => {
   console.log(user);
   const navigate = useNavigate();
   const handleMore = () => {
-    navigate("/readmore");
+    user.currentUser ? navigate("/readmore") : navigate("/login");
   };
 
   return (
