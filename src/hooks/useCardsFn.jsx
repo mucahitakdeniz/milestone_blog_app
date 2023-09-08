@@ -21,5 +21,6 @@ const useCardsFn = () => {
       dispatch(fetchFail());
     }
   };
+  return{readMore}
 };
 export default useCardsFn;
