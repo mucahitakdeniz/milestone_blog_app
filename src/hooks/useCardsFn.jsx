@@ -24,9 +24,6 @@ const useCardsFn = () => {
       console.log(error);
       dispatch(fetchFail());
     }
-    finally{
-      console.log(token);
-    }
   };
   return { readMore };
 };
