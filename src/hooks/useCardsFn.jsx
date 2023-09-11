@@ -25,6 +25,21 @@ const useCardsFn = () => {
       dispatch(fetchFail());
     }
   };
+  const createBlog =async (blog)=> {
+    dispatch(fetchStart());
+    try {
+      await axios.post(
+        `${import.meta.env.VITE_BASE_URL}/api/blogs/${id}/`,blog
+        
+      );
+      dispatch(readCards(data));
+      console.log(data);
+      navigate("/");
+    } catch (error) {
+      console.log(error);
+      dispatch(fetchFail());
+    }
+  }
   return { readMore };
 };
 export default useCardsFn;

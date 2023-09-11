@@ -45,6 +45,25 @@ const cardsSlice = createSlice({
       state.comment_count = payload?.comment_count;
       state.likes_n = payload?.likes_n;
     },
+    createBlogSuccess: (state,{ payload }) => {
+      state.loading = false;
+      state.id = payload?.id;
+      state.title = payload?.title;
+      state.content = payload?.content;
+      state.image = payload?.image;
+      state.category = payload?.category;
+      state.publish_date = payload?.publish_date;
+      state.author = payload?.author;
+      state.status = payload?.status;
+      state.slug = payload?.slug;
+      state.comments = payload?.comments;
+      state.category_name = payload?.category_name;
+      state.likes = payload?.likes;
+      state.post_views = payload?.post_views;
+      state.comment_count = payload?.comment_count;
+      state.likes_n = payload?.likes_n;
+    },
+   
     fetchFail: (state) => {
       state.loading = false;
       state.error = true;
