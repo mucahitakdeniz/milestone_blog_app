@@ -4,7 +4,7 @@ import Register from "../pages/Register";
 import Home from "../pages/Home";
 import Dishboard from "../component/Dishboard";
 import About from "../component/About";
-import NewBlog from "../component/NewBlog";
+import NewBlog from "../pages/NewBlog";
 import ReadMore from "../component/ReadMore";
 
 const AppRouter = () => {
