@@ -25,21 +25,24 @@ const useCardsFn = () => {
       dispatch(fetchFail());
     }
   };
-  const createBlog =async (blog)=> {
+  const createBlog = async (blog) => {
     dispatch(fetchStart());
     try {
       await axios.post(
-        `${import.meta.env.VITE_BASE_URL}/api/blogs/${id}/`,blog
-        
-      );
-      dispatch(readCards(data));
-      console.log(data);
+        `${import.meta.env.VITE_BASE_URL}/api/blogs/${id}/`,
+        blog
+      ),
+        {
+          headers: { Authorization: `Token ${token}` },
+        };
+      notify("Creating a new blog is successful", "success");
+
       navigate("/");
     } catch (error) {
       console.log(error);
       dispatch(fetchFail());
     }
-  }
-  return { readMore };
+  };
+  return { readMore, createBlog };
 };
 export default useCardsFn;

@@ -1,151 +1,149 @@
-import Typography from "@mui/material/Typography";
-
-import { Formik, Form, Field } from "formik";
-import { Box, Button, Card, InputLabel, MenuItem, Select } from "@mui/material";
 import { useState } from "react";
-import InputAdornment from "@mui/material/InputAdornment";
-import IconButton from "@mui/material/IconButton";
-import Visibility from "@mui/icons-material/Visibility";
-import VisibilityOff from "@mui/icons-material/VisibilityOff";
-import { object, string } from "yup";
-import { TextField } from "@mui/material";
-import { Link } from "react-router-dom";
-import useAuthCall from "../hooks/useAuthCall";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import TextField from "@mui/material/TextField";
+import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
+import { Navigate } from "react-router-dom";
+import useCardsFn from "../hooks/useCardsFn";
 
-const newBlog = () => {
-  const { newBlog } = useAuthCall();
-  const [show, setShow] = useState(false);
-  const newBlogSchema = object({
-    email: string()
-      .email("Lütfen geçerli bir e-posta adresi giriniz!")
-      .required("Bu alan boş kırakılamaz"),
-    password: string()
-      .required("Bu alan boş kırakılamaz")
-      .min(8, "Şifreniz 8 karakretden küçük olamaz")
-      .max(20, "Şifreniz 20 karakretden büyük olamaz")
-      .matches(/\d+/, "En az bir rakam içermelidir.")
-      .matches(/[a-z]/, "En az bir küçük harf içermelidir.")
-      .matches(/[A-Z]/, "En az bir büyük harf içermelidir.")
-      .matches(/[!,?{}><%&$#*£+-.]+/, "En az bir özel karekter içermelidir."),
+const NewBlog = () => {
+  const { createBlog } = useCardsFn();
+  const [newBlogInfo, setNewBlogInfo] = useState({
+    title: "string",
+    content: "string",
+    image: "",
+    category: "",
+    status: "",
+    slug: "string",
   });
-  const categories = [
-    "Please choose",
+  const category = [
     "Trivia",
     "Travel",
-    "Web Development",
+    "Web development",
     "Al",
     "Science",
     "Fashion",
   ];
-  const togglePasswordVisibility = () => {
-    setShow(!show);
+  const status = ["Draft", "Published"];
+  const handleChange = (e) => {
+    setNewBlogInfo({
+      ...newBlogInfo,
+      [e.target.name]: e.target.value,
+    });
+  };
+  const handleSubmit = () => {
+    e.preventDefault;
+    createBlog(newBlogInfo);
+    setNewBlogInfo({
+      title: "string",
+      content: "string",
+      image: "",
+      category: "",
+      status: "",
+      slug: "string",
+    });
   };
   return (
-    <Card sx={{ height: "35rem" }}>
-      <Formik
-        initialValues={{ email: "", password: "", category: "" }}
-        validationSchema={newBlogSchema}
-        onSubmit={(values, actions) => {
-          newBlog(values);
-          actions.resetForm();
-          actions.setSubmitting(false);
+    <Box sx={{ width: "25rem", margin: "auto", marginTop: "3rem" }}>
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          gap: 2,
+          padding: "1rem",
+          boxShadow: "30px 11px 17px 10px rgba(0, 0, 0, 0.9)",
         }}
+        component="form"
+        onSubmit={handleSubmit}
       >
-        {({ handleChange, handleBlur, values, touched, errors }) => (
-          <Form>
-            <Box
-              sx={{
-                display: "flex",
-                flexDirection: "column",
-                margin: "auto",
-                gap: 2,
-                width: "25rem",
-                height: "1.5rem",
-              }}
-            >
-              <Typography
-                variant="h4"
-                color="darkgreen"
-                marginX={15}
-                marginY={5}
-              >
-                Üye Girişi
-              </Typography>
-              <TextField
-                type="email"
-                name="email"
-                label="Email"
-                variant="outlined"
-                onChange={handleChange}
-                onBlur={handleBlur}
-                value={values.email}
-                error={touched.email && Boolean(errors.email)}
-                helperText={errors.email}
-              />
+        <TextField
+          label="Title"
+          name="title"
+          id="title"
+          type="text"
+          variant="outlined"
+          required
+          onChange={handleChange}
+        />
 
-              <TextField
-                xs={12}
-                type={show ? "text" : "password"}
-                name="password"
-                label="Password"
-                variant="outlined"
-                onChange={handleChange}
-                onBlur={handleBlur}
-                value={values.password}
-                error={touched.password && Boolean(errors.password)}
-                helperText={errors.password}
-                InputProps={{
-                  endAdornment: (
-                    <InputAdornment position="end">
-                      <IconButton onClick={togglePasswordVisibility}>
-                        {show ? (
-                          <Visibility sx={{ color: "red" }} />
-                        ) : (
-                          <VisibilityOff x={{ color: "green" }} />
-                        )}
-                      </IconButton>
-                    </InputAdornment>
-                  ),
-                }}
-              />
-              <InputLabel htmlFor="category">Kategori</InputLabel>
+        <TextField
+          label=" Image Url"
+          name="image"
+          id="image"
+          type="url"
+          variant="outlined"
+          required
+          onChange={handleChange}
+        />
+        <FormControl>
+          <InputLabel variant="outlined" id="category-select-label">
+            Category
+          </InputLabel>
+          <Select
+            labelId="category-select-label"
+            label="category"
+            id="category-select"
+            name="category"
+            value={newBlogInfo.category || ""}
+            required
+            onChange={handleChange}
+          >
+            <MenuItem onClick={() => navigate("/newblog/categorys")}>
+              Please Choose
+            </MenuItem>
 
-              <Select
-                id="category"
-                name="category"
-                label="category"
-                onChange={handleChange}
-                variant="outlined"
-              >
-                {categories.map((category, i) => (
-                  <MenuItem key={i} value={i == 0 ? "" : category}>
-                    {category}
-                  </MenuItem>
-                ))}
-              </Select>
-              <TextField component="select">
-                <Field name="color" variant="select">
-                  {categories.map((category, i) => (
-                    <option
-                      sx={{ height: "15rem" }}
-                      key={i}
-                      value={i == 0 ? "" : category}
-                    >
-                      {category}{" "}
-                    </option>
-                  ))}
-                </Field>
-              </TextField>
+            {category?.map((item, i) => {
+              return (
+                <MenuItem key={i} value={i}>
+                  {item}
+                </MenuItem>
+              );
+            })}
+          </Select>
+        </FormControl>
+        <FormControl>
+          <InputLabel variant="outlined" id="status-select-label">
+            Status
+          </InputLabel>
+          <Select
+            labelId="status-select-label"
+            label="status"
+            id="status-select"
+            name="status"
+            value={newBlogInfo.status || ""}
+            required
+            onChange={handleChange}
+          >
+            <MenuItem onClick={() => Navigate("/newblog/status")}>
+              Please Choose
+            </MenuItem>
 
-              <Button variant="contained" type="submit">
-                Giriş
-              </Button>
-            </Box>
-          </Form>
-        )}
-      </Formik>
-    </Card>
+            {status.map((item, i) => {
+              return (
+                <MenuItem key={i} value={i == 0 ? "d" : "p"}>
+                  {item}
+                </MenuItem>
+              );
+            })}
+          </Select>
+        </FormControl>
+
+        <TextField
+          sx={{ height: "5rem", marginBottom: "2rem" }}
+          label="Content"
+          name="content"
+          id="content"
+          type="text"
+          variant="outlined"
+          required
+          onChange={handleChange}
+        />
+
+        <Button variant="contained" type="submit">
+          New Blog
+        </Button>
+      </Box>
+    </Box>
   );
 };
-
-export default newBlog;
+export default NewBlog;
