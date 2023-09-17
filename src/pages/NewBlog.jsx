@@ -3,7 +3,7 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
-import { Navigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import useCardsFn from "../hooks/useCardsFn";
 
 const NewBlog = () => {

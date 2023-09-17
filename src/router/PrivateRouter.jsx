@@ -1,8 +1,17 @@
-// import { Outlet, Navigate } from "react-router-dom";
+import {useNavigate } from "react-router-dom";
+import NewBlog from "../pages/NewBlog";
+import { useSelector } from "react-redux";
 
-// const PrivateRouter = () => {
-//   const user = true
-//     return user ? <Outlet /> : <Navigate to="/login" />;
-// };
+const PrivateRouter = () => {
+  const { currentUser } = useSelector((state) => state.auth);
+  const navigate =  useNavigate() 
 
-// export default PrivateRouter;
+  if (currentUser) {
+    return <NewBlog />;
+  } else {
+    notify("You must be logged in to use this feature", "error");
+    navigate("/login");
+  }
+};
+
+export default PrivateRouter;

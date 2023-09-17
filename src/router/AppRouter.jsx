@@ -4,8 +4,8 @@ import Register from "../pages/Register";
 import Home from "../pages/Home";
 import Dishboard from "../component/Dishboard";
 import About from "../component/About";
-import NewBlog from "../pages/NewBlog";
 import ReadMore from "../component/ReadMore";
+import PrivateRouter from "./PrivateRouter";
 
 const AppRouter = () => {
   return (
@@ -17,7 +17,7 @@ const AppRouter = () => {
         <Route path="/readmore" element={<ReadMore />} />
 
         <Route path="/about" element={<About />} />
-        <Route path="/newblog" element={<NewBlog />} />
+        <Route path="/newblog" element={<PrivateRouter />} />
       </Route>
     </Routes>
   );
