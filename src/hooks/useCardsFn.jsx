@@ -2,6 +2,7 @@ import { fetchFail, fetchStart, readCards } from "../features/cardsSlice";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
+import { notify } from "../helper/sweetaAlert";
 
 const useCardsFn = () => {
   const navigate = useNavigate();
@@ -11,6 +12,8 @@ const useCardsFn = () => {
   const readMore = async (id) => {
     dispatch(fetchStart());
     try {
+      console.log(token);
+
       const { data } = await axios.get(
         `${import.meta.env.VITE_BASE_URL}/api/blogs/${id}/`,
         {
@@ -28,19 +31,24 @@ const useCardsFn = () => {
   const createBlog = async (blog) => {
     dispatch(fetchStart());
     try {
-      await axios.post(
-        `${import.meta.env.VITE_BASE_URL}/api/blogs/${id}/`,
-        blog
-      ),
+      const { data } = await axios.post(
+        `${import.meta.env.VITE_BASE_URL}/api/blogs/`,
+        blog,
         {
           headers: { Authorization: `Token ${token}` },
-        };
+        }
+      );
+      dispatch(readCards(data));
+
+      console.log(data);
+
       notify("Creating a new blog is successful", "success");
 
       navigate("/");
     } catch (error) {
       console.log(error);
       dispatch(fetchFail());
+      notify("Creating a new blog is not successful", "error");
     }
   };
   return { readMore, createBlog };
