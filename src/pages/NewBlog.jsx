@@ -3,18 +3,18 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import useCardsFn from "../hooks/useCardsFn";
 
 const NewBlog = () => {
+  const navigate = useNavigate();
   const { createBlog } = useCardsFn();
   const [newBlogInfo, setNewBlogInfo] = useState({
-    title: "string",
-    content: "string",
+    title: "",
+    content: "",
     image: "",
     category: "",
     status: "",
-    slug: "string",
   });
   const category = [
     "Trivia",
@@ -32,15 +32,14 @@ const NewBlog = () => {
     });
   };
   const handleSubmit = () => {
-    e.preventDefault;
+    console.log(newBlogInfo);
     createBlog(newBlogInfo);
     setNewBlogInfo({
-      title: "string",
-      content: "string",
+      title: "",
+      content: "",
       image: "",
       category: "",
       status: "",
-      slug: "string",
     });
   };
   return (
@@ -114,7 +113,7 @@ const NewBlog = () => {
             required
             onChange={handleChange}
           >
-            <MenuItem onClick={() => Navigate("/newblog/status")}>
+            <MenuItem onClick={() => navigate("/newblog/status")}>
               Please Choose
             </MenuItem>
 
