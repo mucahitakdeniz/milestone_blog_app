@@ -9,8 +9,10 @@ const Dishboard = () => {
   const cardsDataApi = async () => {
     try {
       const { data } = await axios.get(
-        "https://33438.fullstack.clarusway.com/api/blogs/"
-      );
+  `${import.meta.env.VITE_BASE_URL}/api/blogs/`
+ );
+      console.log(data);
+
       setCardsData(data);
     } catch (error) {
       console.log(error);
@@ -20,7 +22,7 @@ const Dishboard = () => {
   useEffect(() => {
     cardsDataApi();
   }, []);
-  return <Cards cardsData={cardsData} />;
+  return <Cards cardsData={cardsData} cardsDataApi={cardsDataApi} />;
 };
 
 export default Dishboard;

@@ -9,13 +9,7 @@ import useCardsFn from "../hooks/useCardsFn";
 const NewBlog = () => {
   const navigate = useNavigate();
   const { createBlog } = useCardsFn();
-  const [newBlogInfo, setNewBlogInfo] = useState({
-    title: "",
-    content: "",
-    image: "",
-    category: "",
-    status: "",
-  });
+  
   const category = [
     "Trivia",
     "Travel",
@@ -31,7 +25,15 @@ const NewBlog = () => {
       [e.target.name]: e.target.value,
     });
   };
-  const handleSubmit = () => {
+  const [newBlogInfo, setNewBlogInfo] = useState({
+    title: "",
+    content: "",
+    image: "",
+    category: "",
+    status: "",
+  });
+  const handleSubmit = (e) => {
+    e.preventDefault();
     console.log(newBlogInfo);
     createBlog(newBlogInfo);
     setNewBlogInfo({
@@ -138,7 +140,8 @@ const NewBlog = () => {
           onChange={handleChange}
         />
 
-        <Button variant="contained" type="submit">
+        <Button variant="contained" type="submit"  
+>
           New Blog
         </Button>
       </Box>
