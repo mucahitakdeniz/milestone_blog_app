@@ -1,4 +1,4 @@
-import { fetchFail, fetchStart, readCards } from "../features/cardsSlice";
+import { fetchFail, fetchStart, readCards,createBlogSuccess } from "../features/cardsSlice";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
@@ -38,7 +38,7 @@ const useCardsFn = () => {
           headers: { Authorization: `Token ${token}` },
         }
       );
-      dispatch(readCards(data));
+      dispatch(createBlogSuccess(data));
 
       console.log(data);
 

@@ -71,5 +71,5 @@ const cardsSlice = createSlice({
   },
 });
 
-export const { fetchStart, readCards, fetchFail } = cardsSlice.actions;
+export const { fetchStart, readCards, fetchFail,createBlogSuccess } = cardsSlice.actions;
 export default cardsSlice.reducer;
