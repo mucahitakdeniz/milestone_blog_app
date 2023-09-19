@@ -82,10 +82,15 @@ const Cards = ({ cardsData, cardsDataApi }) => {
               <Box sx={{ display: "flex", gap: "5px" }}>
                 <Box sx={{ display: "flex" }}>
                   <FavoriteIcon
-                    onClick={() => {
-                      likesBlog(item.id);
-                      cardsDataApi()
-                      navigate("/")
+                    onClick={() =>{
+                      likesBlog(item.id)
+                        .then(() => {
+                          cardsDataApi();
+                          navigate("/");
+                        })
+                        .catch((error) => {
+                          console.error("Beğeni işlemi hatası:", error);
+                        });
                     }}
                   />
                   <Typography variant="body3" color="text.secondary">
