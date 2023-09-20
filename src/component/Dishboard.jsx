@@ -1,28 +1,16 @@
-import axios from "axios";
-import { useState } from "react";
-// import { toastErrorNotify } from "../helper/ToastNotify";
 import { useEffect } from "react";
 import Cards from "./Cards";
+import useAxios from "../hooks/useAxios";
+import { useSelector } from "react-redux";
 
 const Dishboard = () => {
-  const [cardsData, setCardsData] = useState([]);
-  const cardsDataApi = async () => {
-    try {
-      const { data } = await axios.get(
-  `${import.meta.env.VITE_BASE_URL}/api/blogs/`
- );
-      console.log(data);
-
-      setCardsData(data);
-    } catch (error) {
-      console.log(error);
-      alert("axios hatalı");
-    }
-  };
+  const { blogsData } = useSelector((state) => state.blogs);
+  const { axiosFn } = useAxios();
   useEffect(() => {
-    cardsDataApi();
+    axiosFn();
   }, []);
-  return <Cards cardsData={cardsData} cardsDataApi={cardsDataApi} />;
+
+   return <Cards cardsData={blogsData} />;
 };
 
 export default Dishboard;
