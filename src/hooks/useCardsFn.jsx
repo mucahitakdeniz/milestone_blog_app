@@ -26,9 +26,7 @@ const useCardsFn = () => {
         }
       );
       dispatch(readCards(data));
-      console.log(data);
-      console.log(token);
-      navigate("/ReadMore");
+      navigate("/readMore");
     } catch (error) {
       console.log(error);
       dispatch(fetchFail());

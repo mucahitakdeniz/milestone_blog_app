@@ -18,9 +18,8 @@ const Navbar = () => {
   const { logout } = useAuthCall();
 
   const user = useSelector((state) => state.auth);
-  // const handleChange = (event) => {
-  //   setAuth(event.target.checked);
-  // };
+
+  console.log(user);
 
   const handleMenu = (event) => {
     setAnchorEl(event.currentTarget);
@@ -84,7 +83,13 @@ const Navbar = () => {
                   onClick={handleMenu}
                   color="inherit"
                 >
-                  <AccountCircle />
+                  <AccountCircle
+                    sx={{
+                      fontSize: "2.5rem",
+                      padding: "0.5rem",
+                      border: "none",
+                    }}
+                  />
                 </IconButton>
                 <Menu
                   id="menu-appbar"
@@ -102,7 +107,15 @@ const Navbar = () => {
                   onClose={handleClose}
                 >
                   {user.currentUser ? (
-                    <MenuItem onClick={() => logout()}>Log Out</MenuItem>
+                    <>
+                      <MenuItem onClick={() => navigate("/myblog")}>
+                        My Blog
+                      </MenuItem>
+                      <MenuItem onClick={() => navigate("/profile")}>
+                        Profile
+                      </MenuItem>
+                      <MenuItem onClick={() => logout()}>Log Out</MenuItem>
+                    </>
                   ) : (
                     <MenuItem onClick={() => navigate("/login")}>
                       Login

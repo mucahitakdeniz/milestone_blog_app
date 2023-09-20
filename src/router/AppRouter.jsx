@@ -6,6 +6,9 @@ import Dishboard from "../component/Dishboard";
 import About from "../component/About";
 import ReadMore from "../component/ReadMore";
 import PrivateRouter from "./PrivateRouter";
+import Profile from "../pages/Profile";
+import NewBlog from "../pages/NewBlog";
+import MyBlog from "../pages/MyBlog";
 
 const AppRouter = () => {
   return (
@@ -14,10 +17,13 @@ const AppRouter = () => {
       <Route path="/register" element={<Register />} />
       <Route path="/" element={<Home />}>
         <Route index element={<Dishboard />} />
-        <Route path="/readmore" element={<ReadMore />} />
-
         <Route path="/about" element={<About />} />
-        <Route path="/newblog" element={<PrivateRouter />} />
+        <Route path="" element={<PrivateRouter />}>
+          <Route path="profile" element={<Profile />} />
+          <Route path="newblog" element={<NewBlog />} />
+          <Route path="readmore" element={<ReadMore />} />
+          <Route path="myblog" element={<MyBlog/>} />
+        </Route>
       </Route>
     </Routes>
   );
