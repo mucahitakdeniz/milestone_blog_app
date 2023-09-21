@@ -18,7 +18,6 @@ const useAuthCall = () => {
   const login = async (user) => {
     dispatch(fetchStart());
     try {
-      console.log(import.meta.env.VITE_BASE_URL);
       const { data } = await axios.post(`${URL}/users/auth/login/`, user);
       dispatch(loginSuccess(data));
       notify("Login successful", "success");

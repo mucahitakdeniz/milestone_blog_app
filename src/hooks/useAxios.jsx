@@ -10,7 +10,6 @@ const useAxios = () => {
       const { data } = await axios.get(
         `${import.meta.env.VITE_BASE_URL}/api/blogs/`
       );
-      console.log(data);
       dispatch(axiosSuccess(data));
     } catch (error) {
       console.log(error);

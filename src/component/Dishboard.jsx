@@ -10,7 +10,7 @@ const Dishboard = () => {
     axiosFn();
   }, []);
 
-   return <Cards cardsData={blogsData} />;
+   return <Cards cardsData={blogsData} userId={null} />;
 };
 
 export default Dishboard;

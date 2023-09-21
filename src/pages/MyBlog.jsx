@@ -5,12 +5,13 @@ import { useSelector } from "react-redux";
 
 const MyBlog = () => {
   const { blogsData } = useSelector((state) => state.blogs);
+  const user = useSelector((state) => state.auth);
   const { axiosFn } = useAxios();
   useEffect(() => {
     axiosFn();
   }, []);
-
-   return <Cards cardsData={blogsData} />;
+console.log(user);
+  return <Cards cardsData={blogsData} userId={user} />;
 };
 
 export default MyBlog;
