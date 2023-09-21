@@ -107,15 +107,23 @@ const Navbar = () => {
                   onClose={handleClose}
                 >
                   {user.currentUser ? (
-                    <>
-                      <MenuItem onClick={() => navigate("/myblog")}>
+                    [
+                      <MenuItem
+                        key="my-blog"
+                        onClick={() => navigate("/myblog")}
+                      >
                         My Blog
-                      </MenuItem>
-                      <MenuItem onClick={() => navigate("/profile")}>
+                      </MenuItem>,
+                      <MenuItem
+                        key="profile"
+                        onClick={() => navigate("/profile")}
+                      >
                         Profile
-                      </MenuItem>
-                      <MenuItem onClick={() => logout()}>Log Out</MenuItem>
-                    </>
+                      </MenuItem>,
+                      <MenuItem key="logout" onClick={() => logout()}>
+                        Log Out
+                      </MenuItem>,
+                    ]
                   ) : (
                     <MenuItem onClick={() => navigate("/login")}>
                       Login

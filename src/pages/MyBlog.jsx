@@ -1,8 +1,16 @@
-import Dishboard from "../component/Dishboard"
+import { useEffect } from "react";
+import Cards from "../component/Cards";
+import useAxios from "../hooks/useAxios";
+import { useSelector } from "react-redux";
 
 const MyBlog = () => {
-  return <Dishboard/>
+  const { blogsData } = useSelector((state) => state.blogs);
+  const { axiosFn } = useAxios();
+  useEffect(() => {
+    axiosFn();
+  }, []);
 
-}
+   return <Cards cardsData={blogsData} />;
+};
 
-export default MyBlog
+export default MyBlog;
