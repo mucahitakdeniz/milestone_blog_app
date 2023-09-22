@@ -13,7 +13,7 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { notify } from "../helper/sweetaAlert";
 
-const Cards = ({ cardsData, userId  }) => {
+const Cards = ({ cardsData,authorname}) => {
   const { readMore, likesBlog } = useCardsFn();
   const { currentUser } = useSelector((state) => state.auth);
   const navigate = useNavigate();
@@ -25,14 +25,17 @@ const Cards = ({ cardsData, userId  }) => {
       navigate("login");
     }
   };
-  console.log(userId);
+  console.log(cardsData);
+  console.log(authorname);
+  
   return (
     <Grid
       container
       spacing={5}
       sx={{ marginY: "2rem", justifyContent: "center" }}
     >
-      {cardsData?.map((item) => (
+      {cardsData?.filter((item) => authorname ?  item.author
+==authorname : item).map((item) => (
         <Grid item key={item.id} xs={12} sm={6} md={4}>
           <Card
             sx={{
@@ -85,7 +88,6 @@ const Cards = ({ cardsData, userId  }) => {
                     onClick={() =>{
                       likesBlog(item.id)
                         .then(() => {
-                        //  cardsDataApi();
                           navigate("/");
                         })
                         .catch((error) => {
