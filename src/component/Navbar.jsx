@@ -19,7 +19,6 @@ const Navbar = () => {
 
   const user = useSelector((state) => state.auth);
 
-
   const handleMenu = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -109,13 +108,19 @@ const Navbar = () => {
                     [
                       <MenuItem
                         key="my-blog"
-                        onClick={() => navigate("/myblog")}
+                        onClick={() => {
+                          handleClose();
+                          navigate("myblog");
+                        }}
                       >
                         My Blog
                       </MenuItem>,
                       <MenuItem
                         key="profile"
-                        onClick={() => navigate("/profile")}
+                        onClick={() => {
+                          handleClose();
+                          navigate("/profile");
+                        }}
                       >
                         Profile
                       </MenuItem>,

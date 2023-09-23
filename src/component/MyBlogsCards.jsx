@@ -25,16 +25,14 @@ const MyBlogsCards = ({ cardsData, authorname }) => {
       navigate("login");
     }
   };
-  const filterData = cardsData?.filter((item) =>item.author === authorname 
-  );
-
+  const filterData = cardsData?.filter((item) => item.author === authorname);
   return (
     <Grid
       container
       spacing={5}
       sx={{ marginY: "2rem", justifyContent: "center" }}
     >
-      {filterData.length === 0 ? (
+      {filterData.length == 0 ? (
         <h1>I'm sorry. You don't have any blog!</h1>
       ) : (
         filterData.map((item) => (
@@ -118,10 +116,21 @@ const MyBlogsCards = ({ cardsData, authorname }) => {
                   sx={{
                     backgroundColor: "lightgreen",
                     marginLeft: "2rem",
+                    width:"6rem"
                   }}
                   onClick={() => handleReadMore(item.id)}
                 >
                   Read More
+                </Button>
+                <Button
+                  sx={{
+                    backgroundColor: "red",
+                    marginLeft: "2rem",
+                    height:"4rem",
+                  }}
+                  onClick={() => console.log("deleted")}
+                >
+                  Delete
                 </Button>
               </CardActions>
             </Card>

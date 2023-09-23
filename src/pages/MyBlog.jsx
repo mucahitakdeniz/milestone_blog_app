@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import MyBlogsCards from "../component/Cards";
+import MyBlogsCards from "../component/MyBlogsCards";
 import useAxios from "../hooks/useAxios";
 import { useSelector } from "react-redux";
 
