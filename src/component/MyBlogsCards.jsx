@@ -4,7 +4,7 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import { Box, Container, Grid } from "@mui/material";
+import { Box, Grid } from "@mui/material";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
@@ -12,13 +12,11 @@ import useCardsFn from "../hooks/useCardsFn";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { notify } from "../helper/sweetaAlert";
-import useAxios from "../hooks/useAxios";
 
 const MyBlogsCards = ({ cardsData, authorname }) => {
   const { readMore, likesBlog, deleteBlog } = useCardsFn();
   const { currentUser } = useSelector((state) => state.auth);
   const navigate = useNavigate();
-  const { axiosFn } = useAxios();
 
   const handleReadMore = (id) => {
     if (currentUser) {
@@ -36,19 +34,12 @@ const MyBlogsCards = ({ cardsData, authorname }) => {
       sx={{ marginY: "2rem", justifyContent: "center" }}
     >
       {filterData.length == 0 ? (
-        <Container
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
-            alignItems: "center",
-            minHeight: "100vh",
-          }}
-        >
-          <Typography variant="h1" color="error" sx={{ width: "50rem" }}>
+        <Box sx={{ textAlign: "center" }}>
+          <Typography variant="h3" color="error" padding="4rem">
             I'm sorry. You don't have any blog!
           </Typography>
-        </Container>
+          <Button variant="contained" color="success" onClick={()=> navigate("/newblog")}>Write blog</Button>
+        </Box>
       ) : (
         filterData.map((item) => (
           <Grid item key={item.id} xs={12} sm={6} md={4}>
@@ -127,9 +118,8 @@ const MyBlogsCards = ({ cardsData, authorname }) => {
                     </Typography>
                   </Box>
                 </Box>
-                <Button
+                <Button variant="contained" color="lightgreen"
                   sx={{
-                    backgroundColor: "lightgreen",
                     marginLeft: "2rem",
                     width: "6rem",
                   }}
