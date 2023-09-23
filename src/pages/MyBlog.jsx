@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import Cards from "../component/Cards";
+import MyBlogsCards from "../component/Cards";
 import useAxios from "../hooks/useAxios";
 import { useSelector } from "react-redux";
 
@@ -12,9 +12,9 @@ const MyBlog = () => {
   useEffect(() => {
     axiosFn();
   }, []);
-  return;
+  return (
 
-  <Cards cardsData={blogsData} authorname={currentUser.username} />;
+  <MyBlogsCards cardsData={blogsData} authorname={currentUser.username} /> )
 };
 
 export default MyBlog;
