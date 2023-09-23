@@ -3,6 +3,7 @@ import {
   fetchStart,
   readCards,
   createBlogSuccess,
+  deleteBlogSuccess,
 } from "../features/cardsSlice";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -16,9 +17,8 @@ const useCardsFn = () => {
 
   const readMore = async (id) => {
     dispatch(fetchStart());
+    r;
     try {
-      console.log(token);
-
       const { data } = await axios.get(
         `${import.meta.env.VITE_BASE_URL}/api/blogs/${id}/`,
         {
@@ -64,11 +64,28 @@ const useCardsFn = () => {
           },
         }
       );
-      console.log('Blog beğenme işlemi başarılı:', response.data);
+      console.log("Blog beğenme işlemi başarılı:", response.data);
     } catch (error) {
-      console.error('Blog beğenme işlemi sırasında hata oluştu:', error);
+      console.error("Blog beğenme işlemi sırasında hata oluştu:", error);
     }
   };
-  return { readMore, createBlog, likesBlog };
+  const deleteBlog = async (id) => {
+    try {
+      await axios.delete(`${import.meta.env.VITE_BASE_URL}/api/blogs/${id}/`, {
+        headers: {
+          Authorization: `Token ${token}`,
+        },
+      });
+      dispatch(deleteBlogSuccess());
+      notify("Blog Deleted is successful", "success");
+
+      console.log("Blog silme işlemi başarılı:");
+    } catch (error) {
+      notify("Blog Deleted is not successful", "error");
+
+      console.error("Blog silme işlemi sırasında hata oluştu:", error);
+    }
+  };
+  return { readMore, createBlog, likesBlog, deleteBlog };
 };
 export default useCardsFn;

@@ -11,7 +11,7 @@ const MyBlog = () => {
 
   useEffect(() => {
     axiosFn();
-  }, []);
+  }, [blogsData]);
   return (
 
   <MyBlogsCards cardsData={blogsData} authorname={currentUser.username} /> )
