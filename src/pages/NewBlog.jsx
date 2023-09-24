@@ -2,14 +2,14 @@ import { useState } from "react";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
-import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
+import {FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import useCardsFn from "../hooks/useCardsFn";
 
 const NewBlog = () => {
   const navigate = useNavigate();
   const { createBlog } = useCardsFn();
-  
+
   const category = [
     "Trivia",
     "Travel",
@@ -24,6 +24,7 @@ const NewBlog = () => {
       ...newBlogInfo,
       [e.target.name]: e.target.value,
     });
+    console.log(newBlogInfo);
   };
   const [newBlogInfo, setNewBlogInfo] = useState({
     title: "",
@@ -32,6 +33,7 @@ const NewBlog = () => {
     category: "",
     status: "",
   });
+  const [showCategory, setshowCategory] = useState(false);
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(newBlogInfo);
@@ -85,14 +87,12 @@ const NewBlog = () => {
             label="category"
             id="category-select"
             name="category"
-            value={newBlogInfo.category || ""}
+            value={newBlogInfo.category==0 ? "0" : newBlogInfo.category}
             required
             onChange={handleChange}
           >
-            <MenuItem onClick={() => navigate("/newblog/categorys")}>
+            <MenuItem onClick={() => navigate("/newblog/categorys")}/>
               Please Choose
-            </MenuItem>
-
             {category?.map((item, i) => {
               return (
                 <MenuItem key={i} value={i}>
@@ -115,9 +115,7 @@ const NewBlog = () => {
             required
             onChange={handleChange}
           >
-            <MenuItem onClick={() => navigate("/newblog/status")}>
-              Please Choose
-            </MenuItem>
+            <MenuItem onClick={() => navigate("/newblog/status")}/>
 
             {status.map((item, i) => {
               return (
@@ -137,11 +135,12 @@ const NewBlog = () => {
           type="text"
           variant="outlined"
           required
+          multiline
+          rows={2}
           onChange={handleChange}
         />
 
-        <Button variant="contained" type="submit"  
->
+        <Button variant="contained" type="submit">
           New Blog
         </Button>
       </Box>

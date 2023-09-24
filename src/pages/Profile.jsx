@@ -25,9 +25,9 @@ const Profile = () => {
           justifyContent: "center",
           alignItems: "center",
           gap: "4vh",
-          height: "50vh",
+          height: "45vh",
           width: "40vh",
-          padding: "10vh",
+          padding: "12vh",
           boxShadow: "0 10px 18px rgba(3, 2, 2, 0.788)",
         }}
       >
