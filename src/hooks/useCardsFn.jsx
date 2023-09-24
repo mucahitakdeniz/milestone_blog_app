@@ -17,7 +17,7 @@ const useCardsFn = () => {
 
   const readMore = async (id) => {
     dispatch(fetchStart());
-    r;
+    ;
     try {
       const { data } = await axios.get(
         `${import.meta.env.VITE_BASE_URL}/api/blogs/${id}/`,
