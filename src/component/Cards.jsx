@@ -8,48 +8,71 @@ import { Box, Grid } from "@mui/material";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
-import useCardsFn from "../hooks/useCardsFn";
+import useCardsFn from "../hooks/useBlogsFn";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { notify } from "../helper/sweetaAlert";
 
-const Cards = ({ cardsData }) => {
-  const { readMore, likesBlog } = useCardsFn();
-  const { currentUser } = useSelector((state) => state.auth);
+const Cards = ({ blogsData }) => {
+  const { likesBlog } = useCardsFn();
+  const { currentUser, currentUserId, isActive } = useSelector(
+    (state) => state.auth
+  );
   const navigate = useNavigate();
   const handleReadMore = (id) => {
     if (currentUser) {
-      readMore(id);
+      navigate(`/readmore/${id}`);
     } else {
-      notify("You must be logged in to use this feature", "error");
+      notify("Bu işlemi yapmak için giriş yapmalısın", "error");
       navigate("login");
     }
   };
-
+  const handleLike = (id) => {
+    if (currentUser) {
+      likesBlog(id);
+    } else {
+      notify("Bu işlemi yapmak için giriş yapmalısın", "error");
+      navigate("login");
+    }
+  };
+  const handleComment = (id) => {
+    if (currentUser) {
+      likesBlog(id);
+    } else {
+      notify("Bu işlemi yapmak için giriş yapmalısın", "error");
+      navigate("login");
+    }
+  };
   return (
-    <Grid
-      container
-      spacing={5}
-      sx={{ marginY: "2rem", justifyContent: "center" }}
-    >
-      {cardsData?.map((item) => (
-        <Grid item key={item.id} xs={12} sm={6} md={4}>
+    <Grid container spacing={7} marginTop={4} marginBottom={7} >
+      {blogsData?.map((item) => (
+        <Grid item key={item._id} xs={12} sm={6} md={4}>
           <Card
             sx={{
-              padding: "2rem",
-              width: "80%",
-              height: "30rem",
-              boxShadow: "0 10px 18px rgba(3, 2, 2, 0.788)",
+              padding: "1.2rem",
+              width: "21rem",
+              height: "40rem",
+              borderRadius: "1rem",
+              boxShadow: "5px 10px 18px rgba(3, 2, 2, 0.788)",
               display: "flex",
               flexDirection: "column",
-              justifyContent: "space-between",
-              gap: "5px",
+              marginRight:"1rem"
+              
             }}
           >
             <CardMedia
-              sx={{ height: "100px", width: "100px", margin: "auto" }}
+              sx={{
+                width: "100%",
+                height: "50%",
+                objectFit: "cover",
+                margin: "auto",
+                marginTop: "2rem",
+                borderRadius: "1rem",
+                boxShadow: "0 5px 18px rgba(1, 8, 4, 0.788)"
+              }}
               image={item.image}
               title={item.title}
+              component="img"
             />
             <CardContent>
               <Typography gutterBottom variant="h5" component="div">
@@ -59,37 +82,40 @@ const Cards = ({ cardsData }) => {
               <Typography
                 variant="body2"
                 color="text.secondary"
-                sx={{ maxHeight: "2.5rem", overflow: "hidden" }}
+                sx={{
+                  maxHeight: "2.5rem",
+                  overflow: "hidden",
+                  textOverflow: "ellipsis",
+                  mb: 1,
+                }}
               >
                 {item.content}
               </Typography>
-              <Typography variant="body2" color="text.secondary">
-                {new Intl.DateTimeFormat("tr-TR", {
-                  year: "numeric",
-                  month: "2-digit",
-                  day: "2-digit",
-                  hour: "2-digit",
-                  minute: "2-digit",
-                  second: "2-digit",
-                  hour12: false,
-                }).format(new Date(item.publish_date))}
-              </Typography>
-              <Typography variant="body3" color="text.secondary">
+
+              <Typography
+                variant="h6"
+                color="text.secondary.dark"
+                sx={{ mt: 1 }}
+              >
                 {item.author}
+              </Typography>
+              <Typography variant="body2" color="text.secondary">
+                {item.createds}
               </Typography>
             </CardContent>
             <CardActions>
-              <Box sx={{ display: "flex", gap: "5px" }}>
+              <Box sx={{ display: "flex", gap: "1rem", fontSize: "1.5rem" }}>
                 <Box sx={{ display: "flex" }}>
                   <FavoriteIcon
+                    sx={{
+                      color: item.likes_n.includes(currentUserId) ? "red" : "",
+                      fontSize: "2rem",
+                      "&:hover": {
+                        cursor: "pointer",
+                      },
+                    }}
                     onClick={() => {
-                      likesBlog(item.id)
-                        .then(() => {
-                          navigate("/");
-                        })
-                        .catch((error) => {
-                          console.error("Beğeni işlemi hatası:", error);
-                        });
+                      handleLike(item._id);
                     }}
                   />
                   <Typography variant="body3" color="text.secondary">
@@ -97,27 +123,40 @@ const Cards = ({ cardsData }) => {
                   </Typography>
                 </Box>
                 <Box sx={{ display: "flex" }}>
-                  <ChatBubbleOutlineIcon />
+                  <ChatBubbleOutlineIcon
+                    sx={{
+                      "&:hover": {
+                        cursor: "pointer",
+                      },fontSize: "2rem"
+                    }}
+                    onClick={() => handleComment(item._id)}
+                  />
                   <Typography variant="body3" color="text.secondary">
                     {item.comment_count}
                   </Typography>
                 </Box>
                 <Box sx={{ display: "flex" }}>
-                  <RemoveRedEyeIcon />
+                  <RemoveRedEyeIcon sx={{fontSize: "2rem",}}/>
                   <Typography variant="body3" color="text.secondary">
                     {item.post_views}
                   </Typography>
                 </Box>
               </Box>
-              <Button
-                sx={{
-                  backgroundColor: "lightgreen",
-                  marginLeft: "2rem",
-                }}
-                onClick={() => handleReadMore(item.id)}
-              >
-                Read More
-              </Button>
+              {isActive && (
+                <Button
+                  sx={{
+                    backgroundColor: "lightgreen",
+                    marginLeft: "5rem",
+                    "&:hover": {
+                      backgroundColor: "lightsalmon",
+                      color: "black",
+                    },
+                  }}
+                  onClick={() => handleReadMore(item._id)}
+                >
+                  Daha Fazla
+                </Button>
+              )}
             </CardActions>
           </Card>
         </Grid>

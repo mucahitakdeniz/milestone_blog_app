@@ -10,16 +10,13 @@ const cardsSlice = createSlice({
     content: null,
     image: null,
     category: null,
-    publish_date: null,
     author: null,
     status: null,
-    slug: null,
-    comments: null,
-    category_name: null,
     likes: null,
+    likes_n: [],
     post_views: null,
     comment_count: null,
-    likes_n: null,
+    createds: null,
   },
   reducers: {
     fetchStart: (state) => {
@@ -28,60 +25,40 @@ const cardsSlice = createSlice({
     },
 
     readCards: (state, { payload }) => {
+      console.log(payload);
       state.loading = false;
-      state.id = payload?.id;
+      state.id = payload?._id;
       state.title = payload?.title;
       state.content = payload?.content;
       state.image = payload?.image;
-      state.category = payload?.category;
-      state.publish_date = payload?.publish_date;
       state.author = payload?.author;
       state.status = payload?.status;
-      state.slug = payload?.slug;
-      state.comments = payload?.comments;
-      state.category_name = payload?.category_name;
+      state.category = payload?.category_id;
       state.likes = payload?.likes;
       state.post_views = payload?.post_views;
       state.comment_count = payload?.comment_count;
       state.likes_n = payload?.likes_n;
+      state.createds = payload?.createds;
     },
-    createBlogSuccess: (state,{ payload }) => {
+    createBlogSuccess: (state) => {
       state.loading = false;
-      state.id = payload?.id;
-      state.title = payload?.title;
-      state.content = payload?.content;
-      state.image = payload?.image;
-      state.category = payload?.category;
-      state.publish_date = payload?.publish_date;
-      state.author = payload?.author;
-      state.status = payload?.status;
-      state.slug = payload?.slug;
-      state.comments = payload?.comments;
-      state.category_name = payload?.category_name;
-      state.likes = payload?.likes;
-      state.post_views = payload?.post_views;
-      state.comment_count = payload?.comment_count;
-      state.likes_n = payload?.likes_n;
     },
-    deleteBlogSuccess:(state) => {
+    deleteBlogSuccess: (state) => {
       state.loading = false;
       state.id = null;
       state.title = null;
       state.content = null;
       state.image = null;
       state.category = null;
-      state.publish_date = null;
       state.author = null;
       state.status = null;
-      state.slug = null      
-      state.comments = null;
-      state.category_name = null;
-      state.likes = null
+      state.likes = null;
       state.post_views = null;
       state.comment_count = null;
       state.likes_n = null;
+      state.createds = null;
     },
-   
+
     fetchFail: (state) => {
       state.loading = false;
       state.error = true;
@@ -89,5 +66,12 @@ const cardsSlice = createSlice({
   },
 });
 
-export const { fetchStart, readCards, fetchFail,createBlogSuccess,deleteBlogSuccess } = cardsSlice.actions;
+export const {
+  fetchStart,
+  readCards,
+  fetchFail,
+  createBlogSuccess,
+  deleteBlogSuccess,
+  likeBlogSuccsess,
+} = cardsSlice.actions;
 export default cardsSlice.reducer;

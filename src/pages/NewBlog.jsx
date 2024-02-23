@@ -1,42 +1,33 @@
-import { useState } from "react";
+ import { useEffect, useState } from "react";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
-import {FormControl, InputLabel, MenuItem, Select } from "@mui/material";
+import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import useCardsFn from "../hooks/useCardsFn";
+import useBlogsFn from "../hooks/useBlogsFn";
+import { useSelector } from "react-redux";
 
 const NewBlog = () => {
   const navigate = useNavigate();
-  const { createBlog } = useCardsFn();
+  const { createBlog, getCategories } = useBlogsFn();
 
-  const category = [
-    "Trivia",
-    "Travel",
-    "Web development",
-    "Al",
-    "Science",
-    "Fashion",
-  ];
-  const status = ["Draft", "Published"];
+  const { categories } = useSelector((state) => state.blogs);
+  const status = ["Draft", "Publish"];
   const handleChange = (e) => {
     setNewBlogInfo({
       ...newBlogInfo,
       [e.target.name]: e.target.value,
     });
-    console.log(newBlogInfo);
   };
   const [newBlogInfo, setNewBlogInfo] = useState({
     title: "",
     content: "",
     image: "",
-    category: "",
+    category_id: "",
     status: "",
   });
-  const [showCategory, setshowCategory] = useState(false);
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(newBlogInfo);
     createBlog(newBlogInfo);
     setNewBlogInfo({
       title: "",
@@ -46,6 +37,10 @@ const NewBlog = () => {
       status: "",
     });
   };
+  useEffect(() => {
+    getCategories();
+  }, []);
+
   return (
     <Box sx={{ width: "25rem", margin: "auto", marginTop: "3rem" }}>
       <Box
@@ -84,19 +79,16 @@ const NewBlog = () => {
           </InputLabel>
           <Select
             labelId="category-select-label"
-            label="category"
+            label="Category"
             id="category-select"
-            name="category"
-            value={newBlogInfo.category==0 ? "0" : newBlogInfo.category}
+            name="category_id"
             required
             onChange={handleChange}
           >
-            <MenuItem onClick={() => navigate("/newblog/categorys")}/>
-              Please Choose
-            {category?.map((item, i) => {
+            {categories?.map((item, i) => {
               return (
-                <MenuItem key={i} value={i}>
-                  {item}
+                <MenuItem key={i} value={item._id}>
+                  {item.name}
                 </MenuItem>
               );
             })}
@@ -115,7 +107,7 @@ const NewBlog = () => {
             required
             onChange={handleChange}
           >
-            <MenuItem onClick={() => navigate("/newblog/status")}/>
+            <MenuItem onClick={() => navigate("/newblog/status")} />
 
             {status.map((item, i) => {
               return (
@@ -136,12 +128,12 @@ const NewBlog = () => {
           variant="outlined"
           required
           multiline
-          rows={2}
+          rows={4}
           onChange={handleChange}
         />
 
-        <Button variant="contained" type="submit">
-          New Blog
+        <Button variant="contained" type="submit" sx={{ marginTop: "1rem" }}>
+          Yeni Blog
         </Button>
       </Box>
     </Box>

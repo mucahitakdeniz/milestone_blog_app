@@ -1,23 +1,21 @@
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
-import IconButton from "@mui/material/IconButton";
-import AccountCircle from "@mui/icons-material/AccountCircle";
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
 import { useState } from "react";
-import { Link } from "@mui/material";
+import { Avatar, Button, Link } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import useAuthCall from "../hooks/useAuthCall";
+import { deepOrange } from "@mui/material/colors";
 
 const Navbar = () => {
   const navigate = useNavigate();
-  const [auth, setAuth] = useState(true);
   const [anchorEl, setAnchorEl] = useState(null);
   const { logout } = useAuthCall();
 
-  const user = useSelector((state) => state.auth);
+  const { currentUser, image } = useSelector((state) => state.auth);
 
   const handleMenu = (event) => {
     setAnchorEl(event.currentTarget);
@@ -25,16 +23,21 @@ const Navbar = () => {
 
   const handleClose = () => {
     setAnchorEl(null);
-    setAuth(true);
   };
 
   return (
-    <Box sx={{ with: "100%" }}>
+    <Box sx={{ width: "100%", height: "8rem" }}>
       <AppBar
         position="static"
-        sx={{ with: "100%", height: "5rem", backgroundColor: "lightseagreen" }}
+        sx={{ width: "100%", height: "8rem", backgroundColor: "lightseagreen" }}
       >
-        <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
+        <Toolbar
+          sx={{
+            display: "flex",
+            justifyContent: "space-between",
+            marginTop: "1rem",
+          }}
+        >
           <Box sx={{ display: "flex", alignItems: "center" }}>
             <img
               src="https://lms.clarusway.com/pluginfile.php/1/core_admin/logocompact/300x300/1688763931/clarusway_LOGO_tek_png.png"
@@ -48,8 +51,9 @@ const Navbar = () => {
               underline="none"
               marginX={1}
               href="/"
+              sx={{ "&:hover": { color: "lightpink" } }}
             >
-              Dashboard
+              Ana Sayfa
             </Link>
             <Link
               color="#01020c"
@@ -57,8 +61,9 @@ const Navbar = () => {
               underline="none"
               marginX={1}
               href="/newblog"
+              sx={{ "&:hover": { color: "lightpink" } }}
             >
-              New Blog
+              Yeni Blog
             </Link>
             <Link
               color="#01020c"
@@ -66,29 +71,40 @@ const Navbar = () => {
               underline="none"
               marginX={1}
               href="/about"
+              sx={{ "&:hover": { color: "lightpink" } }}
             >
-              About
+              Hakkında
             </Link>
           </Box>
+
           <Box>
-            {auth && (
+            {currentUser ? (
               <div>
-                <IconButton
-                  size="large"
-                  aria-label="account of current user"
-                  aria-controls="menu-appbar"
-                  aria-haspopup="true"
-                  onClick={handleMenu}
-                  color="inherit"
-                >
-                  <AccountCircle
+                {image ? (
+                  <Avatar
+                    src={image}
                     sx={{
-                      fontSize: "2.5rem",
-                      padding: "0.5rem",
-                      border: "none",
+                      width: "5rem",
+                      height: "5rem",
+                      marginTop: "1rem",
+                      "&:hover": { cursor: "pointer" },
                     }}
+                    onClick={handleMenu}
                   />
-                </IconButton>
+                ) : (
+                  <Avatar
+                    sx={{
+                      bgcolor: deepOrange[500],
+                      width: "5rem",
+                      height: "5rem",
+                      marginTop: "1rem",
+                      "&:hover": { cursor: "pointer" },
+                    }}
+                    onClick={handleMenu}
+                  >
+                    {currentUser.slice(0, 4).toLocaleUpperCase()}
+                  </Avatar>
+                )}
                 <Menu
                   id="menu-appbar"
                   anchorEl={anchorEl}
@@ -104,37 +120,44 @@ const Navbar = () => {
                   open={Boolean(anchorEl)}
                   onClose={handleClose}
                 >
-                  {user.currentUser ? (
-                    [
-                      <MenuItem
-                        key="my-blog"
-                        onClick={() => {
-                          handleClose();
-                          navigate("myblog");
-                        }}
-                      >
-                        My Blog
-                      </MenuItem>,
-                      <MenuItem
-                        key="profile"
-                        onClick={() => {
-                          handleClose();
-                          navigate("/profile");
-                        }}
-                      >
-                        Profile
-                      </MenuItem>,
-                      <MenuItem key="logout" onClick={() => logout()}>
-                        Log Out
-                      </MenuItem>,
-                    ]
-                  ) : (
-                    <MenuItem onClick={() => navigate("/login")}>
-                      Login
-                    </MenuItem>
-                  )}
+                  <MenuItem
+                    onClick={() => {
+                      handleClose();
+                      navigate("myblog");
+                    }}
+                  >
+                    Bloglarım
+                  </MenuItem>
+                  <MenuItem
+                    onClick={() => {
+                      handleClose();
+                      navigate("/profile");
+                    }}
+                  >
+                    Profil
+                  </MenuItem>
+                  <MenuItem
+                    onClick={() => {
+                      handleClose();
+                      logout();
+                    }}
+                  >
+                    Çıkış
+                  </MenuItem>
                 </Menu>
               </div>
+            ) : (
+              <Button
+                sx={{
+                  bgcolor: deepOrange[600],
+                  color: "white",
+                  marginTop: "1rem",
+                  "&:hover": { cursor: "pointer", bgcolor: deepOrange[900] },
+                }}
+                onClick={() => navigate("/login")}
+              >
+                Giriş yap
+              </Button>
             )}
           </Box>
         </Toolbar>
