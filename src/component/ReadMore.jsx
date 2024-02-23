@@ -26,7 +26,6 @@ const ReadMore = () => {
 
   const handleLike = (id) => {
     likesBlog(id, true);
-    readMore(card.id);
   };
   const hendleDelete = (id) => {
     deleteBlog(id);

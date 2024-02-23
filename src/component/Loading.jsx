@@ -3,11 +3,13 @@ import { useSelector } from "react-redux";
 import { Box } from "@mui/material";
 
 const Loading = () => {
-  const { loading } = useSelector((state) => state.auth);
+  const { loading: authLoading } = useSelector((state) => state.auth);
+  const { loading: blogsLoading } = useSelector((state) => state.blogs);
 
+  const isLoading = authLoading || blogsLoading 
   return (
     <>
-      {loading && (
+      {isLoading && (
         <Box
           display="flex"
           justifyContent="center"

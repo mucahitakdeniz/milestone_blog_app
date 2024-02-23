@@ -96,16 +96,16 @@ const useCardsFn = () => {
     }
   };
   const likesBlog = async (id, read = false) => {
-    dispatch(fetchStart());
+    dispatch(fetchBlogStart());
     try {
       await axiosWithToken.get(`blogs/like/${id}/`);
       dispatch(likesBlogSuccess());
 
       if (!read) {
         getBlogs();
-      }
+      } else readMore(id);
     } catch (error) {
-      dispatch(fetchFail());
+      dispatch(fetchBlogFail());
       notify(
         error?.response?.data.message
           ? error.response.data.message
