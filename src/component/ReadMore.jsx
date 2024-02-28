@@ -4,7 +4,7 @@ import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
-import { Box, Button, Container } from "@mui/material";
+import { Box, Container } from "@mui/material";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
@@ -15,6 +15,7 @@ import useCardsFn from "../hooks/useBlogsFn";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import EditModal from "./EditModal";
+import Comments from "./Comment";
 
 const ReadMore = () => {
   const { likesBlog, readMore, deleteBlog } = useCardsFn();
@@ -26,10 +27,13 @@ const ReadMore = () => {
 
   const handleLike = (id) => {
     likesBlog(id, true);
+    readMore(card.id);
   };
   const hendleDelete = (id) => {
     deleteBlog(id);
   };
+  const [info, setInfo] = useState();
+
   const handleOpen = () => {
     setInfo({
       title: card?.title,
@@ -53,28 +57,20 @@ const ReadMore = () => {
       category_id: "",
     });
   };
-  const [info, setInfo] = useState({
-    title: card?.title,
-    image: card?.image,
-    content: card?.content,
-    _id: card?.id,
-    status: card?.status,
-    category_id: card?.category?._id,
-  });
 
   const [open, setOpen] = useState(false);
   useEffect(() => {
     readMore(id);
-    console.log("deneme");
   }, [id]);
 
   return (
     <Container
       sx={{
-        marginTop: "2rem",
-        marginBottom: "2rem",
+        width:"100%",
         display: "flex",
-        justifyContent: "center",
+        flexDirection: "column",
+        alignItems: "center",
+        padding:"2rem"
       }}
     >
       <EditModal
@@ -85,10 +81,11 @@ const ReadMore = () => {
       />
       <Card
         sx={{
-          width: "50%",
+          width: "90%",
+          maxWidth:"38rem",
           padding: 1,
           borderRadius: "1rem",
-          boxShadow: "0 10px 18px rgba(14, 196, 38, 0.788)"
+          boxShadow: "0 10px 18px rgba(14, 196, 38, 0.788)",
         }}
       >
         <CardContent>
@@ -150,6 +147,7 @@ const ReadMore = () => {
             <Box sx={{ display: "flex" }}>
               <ChatBubbleOutlineIcon
                 sx={{ fontSize: "2.5rem", "&:hover": { cursor: "pointer" } }}
+                onClick={() => window.innerHeight}
               />
               <Typography variant="h5" color="text.secondary">
                 {card.comment_count}
@@ -190,6 +188,7 @@ const ReadMore = () => {
             )}
           </Box>
         </CardActions>
+        <Comments blog_id={card.id} />
       </Card>
     </Container>
   );

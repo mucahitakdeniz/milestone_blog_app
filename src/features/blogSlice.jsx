@@ -21,9 +21,6 @@ const blogSlace = createSlice({
       state.loading = false;
       state.blogsData = payload;
     },
-    likesBlogSuccess: (state) => {
-      state.loading = false;
-    },
     getCategoriesSuccess: (state, { payload }) => {
       state.loading = false;
       state.categories = payload;
@@ -35,6 +32,5 @@ export const {
   fetchBlogStart,
   getBlogsSuccess,
   getCategoriesSuccess,
-  likesBlogSuccess
 } = blogSlace.actions;
 export default blogSlace.reducer;

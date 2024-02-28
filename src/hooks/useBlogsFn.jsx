@@ -10,7 +10,6 @@ import {
   fetchBlogFail,
   fetchBlogStart,
   getCategoriesSuccess,
-  likesBlogSuccess,
 } from "../features/blogSlice";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -96,16 +95,14 @@ const useCardsFn = () => {
     }
   };
   const likesBlog = async (id, read = false) => {
-    dispatch(fetchBlogStart());
+    dispatch(fetchStart());
     try {
       await axiosWithToken.get(`blogs/like/${id}/`);
-      dispatch(likesBlogSuccess());
-
       if (!read) {
         getBlogs();
-      } else readMore(id);
+      }
     } catch (error) {
-      dispatch(fetchBlogFail());
+      dispatch(fetchFail());
       notify(
         error?.response?.data.message
           ? error.response.data.message
