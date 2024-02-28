@@ -29,10 +29,10 @@ const Navbar = () => {
     logout();
   };
   return (
-    <Box sx={{ width: "100%", height: "8rem" }}>
+    <Box >
       <AppBar
         position="static"
-        sx={{ width: "100%", height: "8rem", backgroundColor: "lightseagreen" }}
+        sx={{ width: "100%", height: "8rem", backgroundColor: "lightseagreen",margin:"auto"}}
       >
         <Toolbar
           sx={{

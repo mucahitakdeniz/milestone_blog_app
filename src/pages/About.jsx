@@ -24,9 +24,10 @@ const About = () => {
           justifyContent: "center",
           alignItems: "center",
           gap: "2rem",
-          height: "55vh",
+          minHeight: "25rem",
           width: "35vh",
           padding: "2rem",
+          marginY: "1rem",
           boxShadow: "0 10px 18px rgba(3, 2, 2, 0.788)",
         }}
       >
@@ -35,14 +36,18 @@ const About = () => {
           src="https://media.licdn.com/dms/image/D4D03AQGgXcEs_TJetw/profile-displayphoto-shrink_200_200/0/1687379190285?e=1714003200&v=beta&t=5TwUBpNWU9VzIn8diI6qptCtyZ6qghn9aG1wnlUuHvM"
           sx={{ width: 240, height: 250 }}
         />
-        <Typography variant="h4" color="dark" fontWeight="100">
+        <Typography
+          variant="h5"
+          color="dark"
+          fontWeight="100"
+        >
           Mücahit Akdeniz
         </Typography>
         <Typography variant="h6" color="dark" fontWeight="100">
-          Full Stack Developer{" "}
+          Full Stack Developer
         </Typography>
         <Typography variant="h6" color="dark" fontWeight="100">
-          mucahitakdeniz28@gmail.com{" "}
+          mucahitakdeniz28@gmail.com
         </Typography>
 
         <CardActions>

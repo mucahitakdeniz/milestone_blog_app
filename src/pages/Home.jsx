@@ -5,9 +5,9 @@ import { Box, Container } from "@mui/material";
 
 const Home = () => {
   return (
-    <Box sx={{ width: "100%" }}>
-      <Navbar  />
-      <Container sx={{ minHeight: "75vh" }}>
+    <Box component="div">
+      <Navbar />
+      <Container>
         <Outlet />
       </Container>
 

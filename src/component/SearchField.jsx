@@ -43,8 +43,8 @@ export default function SearchField({ setSearch, search }) {
   return (
     <Box
       sx={{
-        flexGrow: 1,
-        width: "25rem",
+        width: "50%",
+        minWidth:"20rem",
         margin: "auto",
         background: "lightseagreen",
         marginTop: "0.5rem",

@@ -44,9 +44,17 @@ const Cards = ({ blogsData }) => {
     }
   };
   return (
-    <Grid container spacing={7} marginTop={4} marginBottom={7}>
+    <Grid
+      container
+      spacing={3}
+      marginTop={4}
+      marginBottom={7}
+      display="flex"
+      justifyContent="center"
+      alignItems="center"
+    >
       {blogsData?.map((item) => (
-        <Grid item key={item._id} xs={12} sm={6} md={4}>
+        <Grid item key={item._id} xs={10} sm={6} lg={4}>
           <Card
             sx={{
               padding: "1.2rem",
