@@ -100,6 +100,8 @@ const useCardsFn = () => {
       await axiosWithToken.get(`blogs/like/${id}/`);
       if (!read) {
         getBlogs();
+      } else {
+        readMore(id);
       }
     } catch (error) {
       dispatch(fetchFail());

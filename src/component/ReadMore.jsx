@@ -27,7 +27,6 @@ const ReadMore = () => {
 
   const handleLike = (id) => {
     likesBlog(id, true);
-    readMore(card.id);
   };
   const hendleDelete = (id) => {
     deleteBlog(id);
@@ -146,8 +145,8 @@ const ReadMore = () => {
             </Box>
             <Box sx={{ display: "flex" }}>
               <ChatBubbleOutlineIcon
-                sx={{ fontSize: "2.5rem", "&:hover": { cursor: "pointer" } }}
-                onClick={() => window.innerHeight}
+                sx={{ fontSize: "2.5rem"}}
+                
               />
               <Typography variant="h5" color="text.secondary">
                 {card.comment_count}

@@ -53,13 +53,14 @@ const Cards = ({ blogsData }) => {
       display="flex"
       justifyContent="center"
       alignItems="center"
+      margin="auto"
     >
       {blogsData?.map((item) => (
-        <Grid item key={item._id} xs={10} sm={6} lg={4}>
+        <Grid item key={item._id} xs={12} sm={6} lg={4}>
           <Card
             sx={{
               padding: "1.2rem",
-              width: "21rem",
+              maxWidth: "21rem",
               height: "40rem",
               borderRadius: "1rem",
               boxShadow: "5px 10px 18px rgba(3, 2, 2, 0.788)",
@@ -134,12 +135,8 @@ const Cards = ({ blogsData }) => {
                 <Box sx={{ display: "flex" }}>
                   <ChatBubbleOutlineIcon
                     sx={{
-                      "&:hover": {
-                        cursor: "pointer",
-                      },
                       fontSize: "2rem",
                     }}
-                    onClick={() => handleComment(item._id)}
                   />
                   <Typography variant="body3" color="text.secondary">
                     {item.comment_count}
