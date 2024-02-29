@@ -4,13 +4,12 @@ import AppBar from "@mui/material/AppBar";
 const Footer = () => {
   return (
     <AppBar
-      position="relative"
+      position="sticky"
       sx={{
         with: "100%",
         height: "5rem",
         backgroundColor: "lightseagreen",
-        marginTop: "auto",
-        marginBottom: "2rem",
+        bottom: "1rem",
       }}
     >
       <Typography
@@ -18,29 +17,18 @@ const Footer = () => {
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
-          MarginY: "1rem",
+          marginTop: "1rem",
         }}
       >
-        Developed by FS Team
+        Developed by Mücahit Akdenix
       </Typography>
       <Typography
         sx={{
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
-          MarginY: "1rem",
         }}
       >
-        Copyright ©{" "}
-        <Link
-          variant="a"
-          href="https://clarusway.com/"
-          target="_blank"
-          sx={{ color: "black", marginX: "1rem" }}
-        >
-         
-          Clarusway
-        </Link>
         2023
       </Typography>
     </AppBar>

@@ -14,6 +14,8 @@ import { object, string } from "yup";
 import { TextField } from "@mui/material";
 import { Link } from "react-router-dom";
 import useAuthCall from "../hooks/useAuthCall";
+import { deepOrange } from "@mui/material/colors";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const { login } = useAuthCall();
@@ -33,6 +35,7 @@ const Login = () => {
   const togglePasswordVisibility = () => {
     setShow(!show);
   };
+  const navigate = useNavigate();
   return (
     <Grid
       container
@@ -46,14 +49,26 @@ const Login = () => {
         p: 2,
       }}
     >
-      <Grid item xs={12}>
+      <Grid item xs={10} display="flex" flexDirection="column" gap="1rem">
+        <Button
+          sx={{
+            bgcolor: deepOrange[600],
+            color: "white",
+            "&:hover": { cursor: "pointer", bgcolor: deepOrange[900] },
+            width: "20vh",
+            margin: "auto",
+          }}
+          onClick={() => navigate("/")}
+        >
+          Ana Sayfaya Dön
+        </Button>
         <Avatar
           sx={{
             color: "green",
             backgroundColor: "lightgrey",
             m: "auto",
-            width: "5rem",
-            height: "5rem",
+            width: "10vh",
+            height: "10vh",
           }}
         >
           <LockPersonRoundedIcon sx={{ width: "3rem", height: "3rem" }} />
@@ -76,15 +91,10 @@ const Login = () => {
                   flexDirection: "column",
                   margin: "auto",
                   gap: 4,
-                  width: "30rem",
+                  width: "50vh",
                 }}
               >
-                <Typography
-                  variant="h4"
-                  color="darkgreen"
-                  marginX={15}
-                  marginY={5}
-                >
+                <Typography variant="h4" color="darkgreen" margin="auto"  >
                   Üye Girişi
                 </Typography>
                 <TextField

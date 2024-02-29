@@ -46,6 +46,7 @@ const Cards = ({ blogsData }) => {
   return (
     <Grid
       container
+      minHeight="75%"
       spacing={3}
       marginTop={4}
       marginBottom={7}

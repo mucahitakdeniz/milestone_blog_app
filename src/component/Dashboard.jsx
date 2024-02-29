@@ -22,7 +22,17 @@ const Dashboard = () => {
 
   return (
     <Box>
-      <SearchField setSearch={setSearch} search={search} /> <Cards blogsData={filterBlogs} />
+      <SearchField setSearch={setSearch} search={search} />
+      {blogsData.lenght > 0 ? (
+        <Cards blogsData={filterBlogs} />
+      ) : (
+        <img
+          src="https://serpstat.com/img/blog/how-to-create-a-5xx-error-page/1564678552pPwxC6P.png"
+          width="100%"
+          height="100%"
+          sx
+        />
+      )}
     </Box>
   );
 };
