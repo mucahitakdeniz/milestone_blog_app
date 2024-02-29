@@ -4,12 +4,12 @@ import AppBar from "@mui/material/AppBar";
 const Footer = () => {
   return (
     <AppBar
-      position="sticky"
+      position="relative"
       sx={{
         with: "100%",
         height: "5rem",
         backgroundColor: "lightseagreen",
-        bottom: "1rem",
+        bottom: "0px",
       }}
     >
       <Typography
@@ -20,7 +20,7 @@ const Footer = () => {
           marginTop: "1rem",
         }}
       >
-        Developed by Mücahit Akdenix
+        Developed by Mücahit Akdeniz
       </Typography>
       <Typography
         sx={{

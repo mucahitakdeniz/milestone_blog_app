@@ -6,7 +6,6 @@ import blogReducer from "../features/blogSlice";
 import commentReducer from "../features/commentSlice";
 import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage/session";
-import commentSlice from "../features/commentSlice";
 
 const persistConfig = {
   key: "root",
