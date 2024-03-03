@@ -9,8 +9,10 @@ const Footer = () => {
         with: "100%",
         height: "5rem",
         backgroundColor: "lightseagreen",
-        bottom: "0px",
-        margin:"auto"
+        bottom: "1px",
+        margin:"auto",
+        marginY:"1rem"
+        
       }}
     >
       <Typography

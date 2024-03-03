@@ -50,14 +50,19 @@ const authSlice = createSlice({
       state.email = payload.email;
     },
     sendResetPasswordToEmailSuccsess: (state, { payload }) => {
+      state.loading = false;
       state.currentUserId = payload.id;
       state.email = payload?.email;
       state.creationDate = payload?.creationDate;
     },
     sendVerificationPasswordSuccsess: (state, { payload }) => {
+      state.loading = false;
+
       state.token = payload.token;
     },
     cahangePaswordSuscess: (state) => {
+      state.loading = false;
+
       state.currentUserId = null;
       state.email = null;
       state.creationDate = null;

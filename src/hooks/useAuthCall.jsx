@@ -77,6 +77,7 @@ const useAuthCall = () => {
       dispatch(sendResetPasswordToEmailSuccsess(data));
       notify("Email adresinize sıfırlama şifresi gönderildi ", "warning");
       navigate("/resetpassword");
+
     } catch (error) {
       console.log(error);
       dispatch(fetchFail());

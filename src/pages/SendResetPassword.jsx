@@ -23,7 +23,6 @@ const SendResetPassword = () => {
       direction="row-reverse"
       margin="auto"
       maxWidth="lg"
-      height="50rem"
       sx={{
         p: 2,
       }}
@@ -47,15 +46,15 @@ const SendResetPassword = () => {
                   alignItems: "center",
                   justifyContent: "center",
                   margin: "auto",
-                  width: "40rem",
-                  height: "40rem",
+                  width: "100%",
+                  height: "50rem",
                   bgcolor: "#eeeeee",
                   gap: "1rem",
                 }}
               >
                 <LockIcon sx={{ fontSize: "15rem", color: "#0277bd" }} />
                 <Typography variant="h6" color="#0277bd">
-                  Şifreni Unuttun Mu?{" "}
+                  Şifreni Unuttun Mu?
                 </Typography>
                 <TextField
                   type="email"

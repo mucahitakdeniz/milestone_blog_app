@@ -9,6 +9,9 @@ import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import useAuthCall from "../hooks/useAuthCall";
 import { deepOrange } from "@mui/material/colors";
+import { useEffect } from "react";
+
+import MenuDrawer from "./MenuDrawer";
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -16,23 +19,45 @@ const Navbar = () => {
   const { logout } = useAuthCall();
 
   const { currentUser, image } = useSelector((state) => state.auth);
-
   const handleMenu = (event) => {
     setAnchorEl(event.currentTarget);
   };
-
   const handleClose = () => {
     setAnchorEl(null);
   };
+  const [open, setOpen] = useState(false);
+
+  const toggleDrawer = (newOpen) => () => {
+    setOpen(newOpen);
+  };
+
   const handleLogOut = () => {
     navigate("/");
     logout();
   };
+
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
   return (
-    <Box >
+    <Box>
       <AppBar
         position="static"
-        sx={{ width: "100%", height: "8rem", backgroundColor: "lightseagreen",margin:"auto"}}
+        component="nav"
+        sx={{
+          width: "100%",
+          height: "6rem",
+          backgroundColor: "lightseagreen",
+          margin: "auto",
+        }}
       >
         <Toolbar
           sx={{
@@ -41,45 +66,50 @@ const Navbar = () => {
             marginTop: "1rem",
           }}
         >
-          <Box sx={{ display: "flex", alignItems: "center" }}>
-            <img
-              src="https://lms.clarusway.com/pluginfile.php/1/core_admin/logocompact/300x300/1688763931/clarusway_LOGO_tek_png.png"
-              width="50rem"
-              height="50rem"
-              alt="logo"
-            />
-            <Link
-              color="#01020c"
-              variant="button"
-              underline="none"
-              marginX={1}
-              href="/"
-              sx={{ "&:hover": { color: "lightpink" } }}
-            >
-              Ana Sayfa
-            </Link>
-            <Link
-              color="#01020c"
-              variant="button"
-              underline="none"
-              marginX={1}
-              href="/newblog"
-              sx={{ "&:hover": { color: "lightpink" } }}
-            >
-              Yeni Blog
-            </Link>
-            <Link
-              color="#01020c"
-              variant="button"
-              underline="none"
-              marginX={1}
-              href="/about"
-              sx={{ "&:hover": { color: "lightpink" } }}
-            >
-              Hakkında
-            </Link>
-          </Box>
-
+          {windowWidth <= 600 ? (
+            <Box sx={{ display: "flex", alignItems: "center" }}>
+              <MenuDrawer open={open} toggleDrawer={toggleDrawer} />
+            </Box>
+          ) : (
+            <Box sx={{ display: "flex", alignItems: "center" }}>
+              <img
+                src="https://lms.clarusway.com/pluginfile.php/1/core_admin/logocompact/300x300/1688763931/clarusway_LOGO_tek_png.png"
+                width="50rem"
+                height="50rem"
+                alt="logo"
+              />
+              <Link
+                color="#01020c"
+                variant="button"
+                underline="none"
+                marginX={1}
+                href="/"
+                sx={{ "&:hover": { color: "lightpink" } }}
+              >
+                Ana Sayfa
+              </Link>
+              <Link
+                color="#01020c"
+                variant="button"
+                underline="none"
+                marginX={1}
+                href="/newblog"
+                sx={{ "&:hover": { color: "lightpink" } }}
+              >
+                Yeni Blog
+              </Link>
+              <Link
+                color="#01020c"
+                variant="button"
+                underline="none"
+                marginX={1}
+                href="/about"
+                sx={{ "&:hover": { color: "lightpink" } }}
+              >
+                Hakkında
+              </Link>
+            </Box>
+          )}
           <Box>
             {currentUser ? (
               <div>
@@ -87,9 +117,8 @@ const Navbar = () => {
                   <Avatar
                     src={image}
                     sx={{
-                      width: "5rem",
-                      height: "5rem",
-                      marginTop: "1rem",
+                      width: "4.5rem",
+                      height: "4.5rem",
                       "&:hover": { cursor: "pointer" },
                     }}
                     onClick={handleMenu}
@@ -141,7 +170,7 @@ const Navbar = () => {
                   </MenuItem>
                   <MenuItem
                     onClick={() => {
-                      handleLogOut()
+                      handleLogOut();
                     }}
                   >
                     Çıkış
@@ -153,7 +182,6 @@ const Navbar = () => {
                 sx={{
                   bgcolor: deepOrange[600],
                   color: "white",
-                  marginTop: "1rem",
                   "&:hover": { cursor: "pointer", bgcolor: deepOrange[900] },
                 }}
                 onClick={() => navigate("/login")}

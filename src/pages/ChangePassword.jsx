@@ -39,8 +39,8 @@ const ChangePassword = () => {
       alignItems="center"
       direction="row-reverse"
       margin="auto"
-      maxWidth="lg"
-      height="50rem"
+      maxWidth="100%"
+      height="75%"
       sx={{
         p: 2,
       }}
@@ -50,7 +50,7 @@ const ChangePassword = () => {
           initialValues={{ password: "", password2: "" }}
           validationSchema={passwordShema}
           onSubmit={(values, actions) => {
-            changePasword(values.password,currentUserId);
+            changePasword(values.password, currentUserId);
             actions.resetForm();
             actions.setSubmitting(false);
           }}
@@ -64,7 +64,6 @@ const ChangePassword = () => {
                   alignItems: "center",
                   justifyContent: "center",
                   margin: "auto",
-                  width: "40rem",
                   height: "40rem",
                   bgcolor: "#eeeeee",
                   gap: "1rem",
@@ -85,7 +84,7 @@ const ChangePassword = () => {
                   value={values.password || ""}
                   error={touched.password && Boolean(errors.password)}
                   helperText={errors.password}
-                  sx={{ width: "18rem" }}
+                  sx={{ width: "80%", maxWidth: "18rem" }}
                 />
                 <TextField
                   type="password"
@@ -98,7 +97,7 @@ const ChangePassword = () => {
                   value={values.password2 || ""}
                   error={touched.password2 && Boolean(errors.password2)}
                   helperText={errors.password2}
-                  sx={{ width: "18rem" }}
+                  sx={{ width: "80%", maxWidth: "18rem" }}
                 />
                 <Button
                   variant="contained"

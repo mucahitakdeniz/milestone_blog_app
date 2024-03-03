@@ -35,14 +35,6 @@ const Cards = ({ blogsData }) => {
       navigate("login");
     }
   };
-  const handleComment = (id) => {
-    if (currentUser) {
-      likesBlog(id);
-    } else {
-      notify("Bu işlemi yapmak için giriş yapmalısın", "error");
-      navigate("login");
-    }
-  };
   return (
     <Grid
       container
@@ -56,24 +48,23 @@ const Cards = ({ blogsData }) => {
       margin="auto"
     >
       {blogsData?.map((item) => (
-        <Grid item key={item._id} xs={12} sm={6} lg={4}>
+        <Grid item key={item._id} xs={11} sm={6} lg={4}>
           <Card
             sx={{
               padding: "1.2rem",
               maxWidth: "21rem",
-              height: "40rem",
+              height: "33rem",
               borderRadius: "1rem",
               boxShadow: "5px 10px 18px rgba(3, 2, 2, 0.788)",
               display: "flex",
               flexDirection: "column",
-              marginRight: "1rem",
             }}
           >
             <CardMedia
               sx={{
                 width: "100%",
-                height: "100%",
-                objectFit: "cover",
+                height: "50%",
+                objectFit: "inherit",
                 margin: "auto",
                 marginBottom: "1rem",
                 borderRadius: "1rem",

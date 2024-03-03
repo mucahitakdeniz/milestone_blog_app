@@ -25,7 +25,7 @@ const About = () => {
           alignItems: "center",
           gap: "2rem",
           minHeight: "25rem",
-          width: "35vh",
+          width: "70%",
           padding: "2rem",
           marginY: "1rem",
           boxShadow: "0 10px 18px rgba(3, 2, 2, 0.788)",

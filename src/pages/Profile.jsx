@@ -24,7 +24,7 @@ const Profile = () => {
           alignItems: "center",
           gap: "4vh",
           minHeight: "45vh",
-          width: "30vh",
+          width: "60%",
           padding: "12vh",
           boxShadow: "0 10px 18px rgba(3, 2, 2, 0.788)",
         }}

@@ -9,9 +9,7 @@ import useAuthCall from "../hooks/useAuthCall";
 import { useNavigate } from "react-router-dom";
 
 const ResetPassword = () => {
-  const { currentUserId, creationDate } = useSelector(
-    (state) => state.auth
-  );
+  const { currentUserId, creationDate } = useSelector((state) => state.auth);
   const { sendVerificationPassword } = useAuthCall();
   const navigate = useNavigate();
 
@@ -77,7 +75,7 @@ const ResetPassword = () => {
                   alignItems: "center",
                   justifyContent: "center",
                   margin: "auto",
-                  width: "40rem",
+                  width: "98%",
                   height: "40rem",
                   bgcolor: "#eeeeee",
                   gap: "1rem",
@@ -92,16 +90,15 @@ const ResetPassword = () => {
                       alignItems: "center",
                       justifyContent: "center",
                       margin: "auto",
-                      width: "40rem",
                       height: "40rem",
                       bgcolor: "#eeeeee",
                       gap: "2rem",
                     }}
                   >
-                    <Typography variant="h6" color="#0277bd" width="18rem">
+                    <Typography variant="h6" color="#0277bd" width="18rem" textAlign="center">
                       Kalan süre : {time}
                     </Typography>
-                    <Typography variant="h6" color="#0277bd" width="18rem">
+                    <Typography variant="h6" color="#0277bd" width="18rem" textAlign="center">
                       Email adresinize gelen dogrulama şifresini giriniz
                     </Typography>
                     <TextField
@@ -136,16 +133,19 @@ const ResetPassword = () => {
                       alignItems: "center",
                       justifyContent: "center",
                       margin: "auto",
-                      width: "40rem",
+                      width: "100%",
                       height: "40rem",
                       bgcolor: "#eeeeee",
                       gap: "5rem",
                     }}
                   >
-                    <Typography>
+                    <Typography textAlign="center" padding={1}
+                     
+                    >
                       E-mail adresine gönderilen şifreyi 2 dakika içerisinde
                       girmelisiniz
                     </Typography>
+
                     <Button
                       variant="contained"
                       type="submit"
