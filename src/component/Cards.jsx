@@ -38,17 +38,15 @@ const Cards = ({ blogsData }) => {
   return (
     <Grid
       container
-      minHeight="75%"
       spacing={3}
       marginTop={4}
       marginBottom={7}
       display="flex"
       justifyContent="center"
       alignItems="center"
-      margin="auto"
     >
       {blogsData?.map((item) => (
-        <Grid item key={item._id} xs={11} sm={6} lg={4}>
+        <Grid item key={item._id} xs={12} sm={6} lg={4}>
           <Card
             sx={{
               padding: "1.2rem",
@@ -58,6 +56,8 @@ const Cards = ({ blogsData }) => {
               boxShadow: "5px 10px 18px rgba(3, 2, 2, 0.788)",
               display: "flex",
               flexDirection: "column",
+              margin:"auto"
+
             }}
           >
             <CardMedia

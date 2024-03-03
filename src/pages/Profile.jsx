@@ -25,6 +25,7 @@ const Profile = () => {
           gap: "4vh",
           minHeight: "45vh",
           width: "60%",
+          maxWidth: "25rem",
           padding: "12vh",
           boxShadow: "0 10px 18px rgba(3, 2, 2, 0.788)",
         }}
@@ -33,8 +34,10 @@ const Profile = () => {
           <Avatar
             sx={{
               bgcolor: deepOrange[500],
-              width: "15rem",
-              height: "15rem",
+              width: "80%",
+              height: "80%",
+              maxWidth: "15rem",
+              maxHeight: "15rem",
               margin: "2rem auto",
             }}
             alt="User image"
@@ -44,21 +47,18 @@ const Profile = () => {
           <Avatar
             sx={{
               bgcolor: deepOrange[500],
-              width: "15rem",
-              height: "15rem",
+              width: "80%",
+              height: "80%",
+              maxWidth: "15rem",
+              maxHeight: "15rem",
               margin: "2rem auto",
               fontSize: "5rem",
             }}
           >
-            {" "}
             {currentUser.slice(0, 4).toLocaleUpperCase()}
           </Avatar>
         )}
-        <Typography
-          variant="h4"
-          color="dark"
-          fontWeight="500"
-        >
+        <Typography variant="h4" color="dark" fontWeight="500">
           {currentUser}
         </Typography>
         <Typography variant="h5" color="dark" fontWeight="500">

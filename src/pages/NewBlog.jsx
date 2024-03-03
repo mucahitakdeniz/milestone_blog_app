@@ -42,7 +42,7 @@ const NewBlog = () => {
   }, []);
 
   return (
-    <Box sx={{ width: "25rem", margin: "auto", marginTop: "3rem" }}>
+    <Box sx={{ width:"100%",maxWidth: "25rem", margin: "auto", marginTop: "3rem" }}>
       <Box
         sx={{
           display: "flex",
